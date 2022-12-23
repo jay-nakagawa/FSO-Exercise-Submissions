@@ -6,24 +6,24 @@ const Header = (props) => {
   )
 }
 
-// const Content = (props) => {
-//   return (
-//     <div>
-//       <Part part={props.parts[0].name} exercise={props.parts[0].exercises} />
-//       <Part part={props.parts[1].name} exercise={props.parts[1].exercises} />
-//       <Part part={props.parts[2].name} exercise={props.parts[2].exercises} />
-//     </div>
-//   )
-// }
+const Content = (props) => {
+  return (
+    <div>
+      <Part part={props.parts[0].name} exercise={props.parts[0].exercises} />
+      <Part part={props.parts[1].name} exercise={props.parts[1].exercises} />
+      <Part part={props.parts[2].name} exercise={props.parts[2].exercises} />
+    </div>
+  )
+}
 
-// const Part = (props) => {
-//   return (
-//     <div>
-//       {props.part} {props.exercise}
+const Part = (props) => {
+  return (
+    <div>
+      {props.part} {props.exercise}
 
-//     </div>
-//   )
-// }
+    </div>
+  )
+}
 
 
 
@@ -60,7 +60,7 @@ const App = () => {
 
       {console.log(course)}
       <Header course={course.name} />
-      {/* <Content parts={parts} /> */}
+      <Content parts={course.parts} />
       <Footer parts={course.parts} />
 
     </div>
