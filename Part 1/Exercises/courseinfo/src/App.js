@@ -28,13 +28,13 @@ const Header = (props) => {
 
 
 
-// const Footer = (props) => {
-//   return (
-//     <div>
-//       <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
-//     </div>
-//   )
-// }
+const Footer = (props) => {
+  return (
+    <div>
+      <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises }</p>
+    </div>
+  )
+}
 
 const App = () => {
   const course = {
@@ -58,10 +58,10 @@ const App = () => {
   return (
     <div>
 
-      {/* {console.log(parts)} */}
+      {console.log(course)}
       <Header course={course.name} />
-      {/* <Content parts={parts} />
-      <Footer parts={parts} /> */}
+      {/* <Content parts={parts} /> */}
+      <Footer parts={course.parts} />
 
     </div>
   )
