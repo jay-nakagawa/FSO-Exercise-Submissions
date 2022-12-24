@@ -1,5 +1,14 @@
 import { useState } from 'react'
 
+const Button = (props) =>{
+  return (
+    <button>{props.text}</button>
+  )
+
+}
+
+
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -10,9 +19,10 @@ const App = () => {
     <div>
       <div>
         <h2>give feedback</h2>
-        <button>good</button>
-        <button>neutral</button>
-        <button>bad</button>
+        
+        <Button text = "good"/>
+        <Button text = "neutral"/>
+        <Button text = "bad"/>
       </div>
 
       <div>

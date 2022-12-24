@@ -25,9 +25,6 @@ const Part = (props) => {
   )
 }
 
-
-
-
 const Footer = (props) => {
   return (
     <div>
