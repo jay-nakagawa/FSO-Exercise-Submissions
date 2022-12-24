@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-const Button = (props) =>{
+const Button = ({handleClick, text}) =>{
   return (
-    <button>{props.text}</button>
+    <button onClick={handleClick}>{text}</button>
   )
 
 }
@@ -14,21 +14,21 @@ const Stats = (props) =>{
 
 }
 
-
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(5)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [neutral, setNeutral] = useState(2)
+  const [bad, setBad] = useState(1)
 
   return (
     <div>
       <div>
         <h2>give feedback</h2>
         
-        <Button text = "good"/>
-        <Button text = "neutral"/>
-        <Button text = "bad"/>
+        <Button handleClick={() => setGood(good +1)} text = "good"/>
+        <Button handleClick={() => setNeutral(neutral +1)} text = "neutral"/>
+        <Button handleClick={() => setBad(bad +1)} text = "bad"/>
+
       </div>
 
       <div>
