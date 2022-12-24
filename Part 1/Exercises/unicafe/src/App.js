@@ -7,6 +7,12 @@ const Button = (props) =>{
 
 }
 
+const Stats = (props) =>{
+  return (
+    <div>{props.text}: {props.count}</div>
+  )
+
+}
 
 
 const App = () => {
@@ -27,9 +33,9 @@ const App = () => {
 
       <div>
         <h2>statistics</h2>
-      <div>good 6    </div>
-      <div>neutral 2    </div>
-      <div>bad 1    </div>
+        <Stats text= "good" count= "6" />
+        <Stats text= "neutral" count= "2" />
+        <Stats text= "bad" count= "1" />
       </div>
     </div>
 
