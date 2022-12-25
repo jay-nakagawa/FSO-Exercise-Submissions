@@ -16,9 +16,9 @@ const Stats = (props) =>{
 
 const App = () => {
   // save clicks of each button to its own state
-  const [good, setGood] = useState(5)
-  const [neutral, setNeutral] = useState(2)
-  const [bad, setBad] = useState(1)
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
   
   const totalFeedback= (good + neutral + bad)
   const positive= good/totalFeedback*100 + " %"
