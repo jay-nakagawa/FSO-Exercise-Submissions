@@ -20,6 +20,10 @@ const Statistics = (props) =>{
       <Stats text= "good" count= {props.good}/>
       <Stats text= "neutral" count= {props.neutral}/>
       <Stats text= "bad" count= {props.bad}/>
+      <h2>other</h2>
+      <Stats text= "all" count= {props.totalFeedback} />
+      <Stats text= "average" count= {props.average} />
+      <Stats text= "positive" count= {props.positive} />
     </div>
 
   )
@@ -51,17 +55,17 @@ const App = () => {
 
       </div>
 
-      <h2>statistics</h2>
+      
       
 
 
       <div>
         <h2>statistics</h2>
-        <Statistics good={good} neutral={neutral} bad={bad}/>
-        <h2>other</h2>
-        <Stats text= "all" count= {totalFeedback} />
+        <Statistics good={good} neutral={neutral} bad={bad} totalFeedback={totalFeedback} average={average} positive={positive}/>
+        
+        {/* <Stats text= "all" count= {totalFeedback} />
         <Stats text= "average" count= {average} />
-        <Stats text= "positive" count= {positive} />
+        <Stats text= "positive" count= {positive} /> */}
       </div>
     </div>
 
