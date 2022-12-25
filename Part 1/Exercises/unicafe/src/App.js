@@ -13,6 +13,8 @@ const Button = ({handleClick, text}) =>{
 
 
 
+
+
 const StatisticLine = (props) =>{
   return (
     <div>{props.text}: {props.count}</div>
@@ -68,6 +70,7 @@ const App = () => {
         <Button handleClick={() => setBad(bad +1)} text = "bad"/>
 
       </div>
+      
 
       
       
