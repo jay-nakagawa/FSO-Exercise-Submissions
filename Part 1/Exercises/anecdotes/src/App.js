@@ -36,8 +36,8 @@ const App = () => {
     <>
     
       <div>
-        {anecdotes[selected]}
-        has {copy[selected]} votes.
+        <div>{anecdotes[selected]}</div>
+       <div> has {copy[selected]} votes.</div>
       </div>
       <button onClick={plusOne}>
         vote
