@@ -14,7 +14,9 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [vote, setVote] = useState(new Array(anecdotes.length).fill(0))
 
- 
+ let max = Math.max(...vote)
+ let findIndex = vote.indexOf(max)
+ console.log(max)
 
   const copy = [...vote]
 
@@ -43,6 +45,8 @@ const App = () => {
       <button onClick={()=> setSelected(randomNum)}>
         next anecdote
       </button>
+      <h2>Anecdote with the most votes</h2>
+      <div>{anecdotes[findIndex]}</div>
       
     </>
   )
