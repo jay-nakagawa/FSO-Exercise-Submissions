@@ -11,21 +11,15 @@ const Button = ({handleClick, text}) =>{
 
 }
 
-
-
-
-
 const StatisticLine = (props) =>{
   return (
-    <table>
-      <tbody>
+  
         <tr>
 
         <td>{props.text}</td>
         <td>{props.count}</td>
         </tr>
-      </tbody>
-    </table>
+        
   )
 
 }
@@ -41,23 +35,23 @@ const Statistics = (props) =>{
   }
   return (
     <div>
-
+      <table>
+        <tbody>
         <StatisticLine text= "good" count= {props.good}/>
         <StatisticLine text= "neutral" count= {props.neutral}/>
         <StatisticLine text= "bad" count= {props.bad}/>
-        <h2>other</h2>
+        
         <StatisticLine text= "all" count= {props.totalFeedback} />
         <StatisticLine text= "average" count= {props.average} />
         <StatisticLine text= "positive" count= {props.positive} />
+        </tbody>
+        </table>
+       
     </div>
 
   )
 
 }
-
-
-
-
 
 const App = () => {
   // save clicks of each button to its own state
