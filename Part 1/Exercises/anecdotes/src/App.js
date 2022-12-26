@@ -36,6 +36,7 @@ const App = () => {
     <>
     
       <div>
+        <h2>Anecdote of the day</h2>
         <div>{anecdotes[selected]}</div>
        <div> has {copy[selected]} votes.</div>
       </div>
