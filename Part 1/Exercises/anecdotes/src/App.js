@@ -48,6 +48,7 @@ const App = () => {
       </button>
       <h2>Anecdote with the most votes</h2>
       <div>{anecdotes[findIndex]}</div>
+      <div> has {max} votes.</div>
       
     </>
   )
