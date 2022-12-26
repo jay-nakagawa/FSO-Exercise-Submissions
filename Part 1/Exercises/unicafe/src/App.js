@@ -17,10 +17,15 @@ const Button = ({handleClick, text}) =>{
 
 const StatisticLine = (props) =>{
   return (
-    <tr>  
-      <td>{props.text}:</td>
-      <td> {props.count}</td>
-    </tr>
+    <table>
+      <tbody>
+        <tr>
+
+        <td>{props.text}</td>
+        <td>{props.count}</td>
+        </tr>
+      </tbody>
+    </table>
   )
 
 }
