@@ -119,6 +119,3 @@ const Course = ({course}) => {
   
   export default App
 
-  // courses.map(parts=>
-  //   <Course course={course} />
-  // )
