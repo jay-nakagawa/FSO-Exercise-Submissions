@@ -1,23 +1,70 @@
+// const Course = ({course}) => {
+//   const {name,parts} = course
+  
+//   return(
+//     <div>
+//       <h1>{name}</h1>
+//       <ul>
+  
+  
+//         {parts.map(a=>
+//           <li key={a.id}>
+//             {a.name}
+          
+//           </li>
+//           )}
+  
+  
+//       {/* {parts[1].name} 
+//       {parts[2].name}  */}
+//       </ul>
+//     </div>
+  
+//   )
+//     }
+const Part = (props) => {
+  return (
+    <div>
+      {props.part} {props.exercise}
+
+    </div>
+  )
+}
+
+const Header = ({name}) => {
+  console.log(name)
+  return (
+
+    
+    <div>
+      <h1>{name}</h1>
+    </div>
+  )
+}
+
+const Content = ({parts}) => {
+  
+  return (
+
+    
+    <div>
+      <Part part={parts[0].name} exercise={parts[0].exercises} />
+      <Part part={parts[1].name} exercise={parts[1].exercises} />
+      <Part part={parts[2].name} exercise={parts[2].exercises} />
+    </div>
+  )
+}
+
 const Course = ({course}) => {
-  const {name,parts} = course
+  console.log("this is",course.name);
   
   return(
     <div>
-      <h1>{name}</h1>
-      <ul>
-  
-  
-        {parts.map(a=>
-          <li key={a.id}>
-            {a.name}
-          
-          </li>
-          )}
-  
-  
-      {/* {parts[1].name} 
-      {parts[2].name}  */}
-      </ul>
+      
+      
+       <Header name={course.name} />
+      <Content parts={course.parts} />
+      {/* <Total parts={course.parts} /> */}
     </div>
   
   )
