@@ -31,6 +31,8 @@ const Part = (props) => {
   )
 }
 
+
+
 const Header = ({name}) => {
   console.log(name)
   return (
@@ -48,9 +50,16 @@ const Content = ({parts}) => {
 
     
     <div>
-      <Part part={parts[0].name} exercise={parts[0].exercises} />
+       {parts.map(a=>
+         <li key={a.id}>
+            {a.name} {a.exercises}
+          
+          </li>
+          )}
+
+      {/* <Part part={parts[0].name} exercise={parts[0].exercises} />
       <Part part={parts[1].name} exercise={parts[1].exercises} />
-      <Part part={parts[2].name} exercise={parts[2].exercises} />
+      <Part part={parts[2].name} exercise={parts[2].exercises} /> */}
     </div>
   )
 }
