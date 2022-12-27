@@ -1,5 +1,5 @@
-const Course = ({props}) => {
-const {name,parts} = props
+const Course = ({course}) => {
+const {name,parts} = course
 
 return(
   <div>
@@ -51,7 +51,7 @@ const App = () => {
   return( 
     <>
     
-    <Course key= {} props={course} />
+    <Course course={course} />
     </>
   
   )
