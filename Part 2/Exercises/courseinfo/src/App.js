@@ -111,6 +111,8 @@ const Course = ({course}) => {
         }
       ]
     }
+
+    
     console.log(course.parts[1].name)
   
     return( 
