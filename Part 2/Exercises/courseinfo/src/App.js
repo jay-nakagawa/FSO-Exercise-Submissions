@@ -22,10 +22,11 @@
   
 //   )
 //     }
+
 const Part = (props) => {
   return (
     <div>
-      {props.part} {props.exercise}
+      {props.name} {props.exercise}
 
     </div>
   )
@@ -50,11 +51,10 @@ const Content = ({parts}) => {
 
     
     <div>
-       {parts.map(a=>
-         <li key={a.id}>
-            {a.name} {a.exercises}
+       {parts.map(part=>
+         <Part key={part.id} name={part.name} exercise={part.exercises}
           
-          </li>
+          />
           )}
 
       {/* <Part part={parts[0].name} exercise={parts[0].exercises} />
