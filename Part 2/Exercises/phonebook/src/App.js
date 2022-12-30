@@ -25,8 +25,14 @@ const App = () => {
      
       id: persons.length + 1,
     }
-    setPersons(persons.concat(personObject))
-    setNewName('')
+
+    if (persons.find(x=> x.name === personObject.name)){
+      
+    }else{
+      setPersons(persons.concat(personObject))
+      setNewName('')
+    }
+   
   }
 
   console.log(Object.values(persons))
