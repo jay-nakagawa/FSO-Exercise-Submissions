@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 
 const Person = ({ person }) => {
-  return <div>{person.name}</div>;
+  return <div>{person.name} {person.number}</div>;
 };
 
 
@@ -19,15 +19,15 @@ const App = () => {
   }
   const handleNumberChange = (event) => {
     console.log(event.target.value)
-    setNewName(event.target.value)
+    setNewNumber(event.target.value)
   }
 
-  const addName = (event) => {
+  const addPerson = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
     const personObject = {
       name: newName,  //key must be same as existing key
-     
+      number: newNumber,
       id: persons.length + 1,
     }
 
@@ -36,6 +36,7 @@ const App = () => {
     }else{
       setPersons(persons.concat(personObject))
       setNewName('')
+      setNewNumber('')
     }
    
   }
@@ -45,7 +46,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
         </div>
