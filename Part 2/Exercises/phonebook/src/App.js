@@ -27,7 +27,7 @@ const App = () => {
     }
 
     if (persons.find(x=> x.name === personObject.name)){
-      
+      alert(`${personObject.name} is already in the phonebook`)
     }else{
       setPersons(persons.concat(personObject))
       setNewName('')
