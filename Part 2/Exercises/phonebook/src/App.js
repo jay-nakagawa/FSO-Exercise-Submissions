@@ -15,7 +15,7 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [newFilter, setNewFilter] = useState('')
+  const [newFilter, setNewFilter] = useState('A')
 
   const handleNameChange = (event) => {
     console.log(event.target.value)
@@ -49,6 +49,9 @@ const App = () => {
     }
    
   }
+   let filteredPeople = persons.filter((person)=>
+    person.name.includes(newFilter))
+    console.log(filteredPeople)
 
   console.log(Object.values(persons))
   return (
@@ -75,7 +78,9 @@ const App = () => {
       <div>
       <div>debug: {newName}</div>
        
-      {persons.map((person) => (
+   
+
+      {filteredPeople.map((person) => (
           <Person key={person.name} person={person} />
         ))}
       </div>
