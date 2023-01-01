@@ -49,8 +49,11 @@ const App = () => {
     }
    
   }
+  
+
    let filteredPeople = persons.filter((person)=>
-    person.name.includes(newFilter))
+   
+   person.name.toLowerCase().includes(newFilter.toLowerCase()))
     console.log(filteredPeople)
 
   console.log(Object.values(persons))
