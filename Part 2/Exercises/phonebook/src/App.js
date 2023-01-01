@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Person from "./components/person"
 import Filter from "./components/filter"
+import Form from "./components/form"
 
 
 
@@ -37,7 +38,7 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1,
     }
-
+console.log(personObject)
     if (persons.find(x=> x.name === personObject.name)){
       alert(`${personObject.name} is already in the phonebook`)
     }else{
@@ -58,20 +59,19 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Filter newName={newFilter} handleFilterChange={handleFilterChange}/>
+      <Filter 
+        newName={newFilter} 
+        handleFilterChange={handleFilterChange}/>
       
       <h2>Add a Person</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange}/>
-        </div>
-        
-        <div>number: <input value={newNumber} onChange={handleNumberChange} /></div>
-        
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Form 
+        addPerson={addPerson} 
+        handleNameChange={handleNameChange} 
+        handleNumberChange={handleNumberChange}
+        newName={newName}
+        newNumber={newNumber}
+        />
+      
       
       <h2>Numbers</h2>
       <div>
