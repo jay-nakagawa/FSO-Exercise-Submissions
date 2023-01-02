@@ -16,9 +16,9 @@ const update = (id, newObject) => {
 
 // by setting up this modules object within a variable we can avoid errors.
 const personService ={ 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+  getAll, 
+  create, 
+  update 
 }
 
 export default personService
