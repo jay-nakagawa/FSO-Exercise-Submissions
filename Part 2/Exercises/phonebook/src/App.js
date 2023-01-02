@@ -18,6 +18,12 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
 
+ //delete
+ const removePerson = (person) => {
+  console.log(person)
+  
+}
+
   useEffect(() => {
     console.log('effect')
     personService
@@ -65,15 +71,10 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
-
-
-    
-      
     }
-   
-
-  }
+ }
   
+
 
    let filteredPeople = persons.filter((person)=>
    
@@ -105,7 +106,7 @@ const App = () => {
    
 
       {filteredPeople.map((person) => (
-          <Person key={person.name} person={person} />
+          <Person key={person.name} person={person} removePerson={()=>removePerson(person)} />
         ))}
       </div>
     </div>
