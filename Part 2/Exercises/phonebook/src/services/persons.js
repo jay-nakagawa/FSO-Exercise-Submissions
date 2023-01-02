@@ -13,8 +13,12 @@ const update = (id, newObject) => {
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
 
-export default { 
+
+// by setting up this modules object within a variable we can avoid errors.
+const personService ={ 
   getAll: getAll, 
   create: create, 
   update: update 
 }
+
+export default personService

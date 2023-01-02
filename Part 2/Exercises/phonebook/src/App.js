@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Person from "./components/person"
 import Filter from "./components/filter"
 import Form from "./components/form"
-import axios from 'axios'
+
 import personService from './services/persons'
 
 
@@ -20,8 +20,8 @@ const App = () => {
 
   useEffect(() => {
     console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+    personService
+    .getAll()
       .then(response => {
         console.log('promise fulfilled')
         setPersons(response.data)
@@ -55,8 +55,8 @@ const App = () => {
       alert(`${personObject.name} is already in the phonebook`)
     }else{
 
-      axios //add a person
-      .post('http://localhost:3001/persons', personObject)
+      personService //add a person
+      .create(personObject)
       .then(response => {
         console.log(`response data ${response.data}`)
         console.log(`object ${personObject}`) //does this matter?
@@ -67,7 +67,7 @@ const App = () => {
       })
 
 
-      // setPersons(persons.concat(personObject))
+    
       
     }
    
