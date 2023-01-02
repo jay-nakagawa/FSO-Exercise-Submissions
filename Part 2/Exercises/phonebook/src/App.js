@@ -21,6 +21,10 @@ const App = () => {
  //delete
  const removePerson = (person) => {
   console.log(person)
+  personService
+  .remove(person.id)
+  .then(persons =>
+    setPersons(persons))
   
 }
 
