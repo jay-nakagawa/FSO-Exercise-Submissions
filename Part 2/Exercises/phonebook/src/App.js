@@ -49,13 +49,25 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1,
     }
-console.log(personObject)
+    console.log(personObject)
     if (persons.find(x=> x.name === personObject.name)){
       alert(`${personObject.name} is already in the phonebook`)
     }else{
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+
+      axios //add a person
+      .post('http://localhost:3001/persons', personObject)
+      .then(response => {
+        console.log(`response data ${response.data}`)
+        console.log(`object ${personObject}`) //does this matter?
+        setPersons(persons.concat(response.data))
+
+        setNewName('')
+        setNewNumber('')
+      })
+
+
+      // setPersons(persons.concat(personObject))
+      
     }
    
 
