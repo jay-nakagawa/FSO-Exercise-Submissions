@@ -14,7 +14,7 @@ const update = (id, newObject) => {
 }
 
 const remove = (id) => {
-  return axios.put(`${baseUrl}/${id}`)
+  return axios.delete(`${baseUrl}/${id}`)
 }
 
 // by setting up this modules object within a variable we can avoid errors.
