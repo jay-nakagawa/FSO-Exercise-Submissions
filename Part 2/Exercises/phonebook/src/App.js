@@ -19,15 +19,18 @@ const App = () => {
   //delete
   const removePerson = (id) => {
     // console.log(person)
-    personService.remove(id).then(() => {
-      const updatedPersons = persons.filter((person) => {
-        console.log(person.id, id);
-        return person.id !== id;
+    if(window.confirm('Confirm entry deletion')){
+      personService.remove(id).then(() => {
+        const updatedPersons = persons.filter((person) => {
+          console.log(person.id, id);
+          return person.id !== id;
+        });
+        console.log(updatedPersons);
+  
+        setPersons(updatedPersons);
       });
-      console.log(updatedPersons);
-
-      setPersons(updatedPersons);
-    });
+    }
+  
   };
 
   useEffect(() => {
