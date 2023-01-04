@@ -70,7 +70,7 @@ const App = () => {
     console.log(nameToChange)
     console.log(personObject);
     if (nameToChange) {
-     if(window.confirm('test')){
+     if(window.confirm(`${nameToChange.name} is already in the phonebook, replace old number with a new one?`)){
       personService
       .update(nameToChange.id,personObject)
       .then((response)=>{
@@ -98,11 +98,11 @@ const App = () => {
   };
 
   let filteredPeople = persons.filter((person) => {
-    console.log({ person });
+    // console.log({ person });
     return person.name?.toLowerCase().includes(newFilter.toLowerCase());
   });
 
-  console.log(filteredPeople);
+  // console.log(filteredPeople);
   console.log(Object.values(persons));
  
  
