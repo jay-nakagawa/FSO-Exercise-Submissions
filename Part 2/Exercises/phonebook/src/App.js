@@ -42,16 +42,16 @@ const App = () => {
   }, []);
 
   const handleNameChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setNewName(event.target.value);
   };
   const handleNumberChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setNewNumber(event.target.value);
   };
 
   const handleFilterChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setNewFilter(event.target.value);
   };
 
@@ -67,8 +67,8 @@ const App = () => {
 
     
     const nameToChange =  persons.find((x) => x.name === personObject.name)
-    console.log(nameToChange)
-    console.log(personObject);
+    // console.log(nameToChange)
+    // console.log(personObject);
     if (nameToChange) {
      if(window.confirm(`${nameToChange.name} is already in the phonebook, replace old number with a new one?`)){
       personService
@@ -98,12 +98,12 @@ const App = () => {
   };
 
   let filteredPeople = persons.filter((person) => {
-    console.log({ person });
+    // console.log({ person });
     return person.name?.toLowerCase().includes(newFilter.toLowerCase());
   });
 
-  console.log(filteredPeople);
-  console.log(Object.values(persons));
+  // console.log(filteredPeople);
+  // console.log(Object.values(persons));
  
  
   return (
