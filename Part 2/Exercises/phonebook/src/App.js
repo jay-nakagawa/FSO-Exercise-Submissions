@@ -64,9 +64,25 @@ const App = () => {
       number: newNumber,
       id: persons.length + 1,
     };
+
+    
+    const nameToChange =  persons.find((x) => x.name === personObject.name)
+    console.log(nameToChange)
     console.log(personObject);
-    if (persons.find((x) => x.name === personObject.name)) {
-      alert(`${personObject.name} is already in the phonebook`);
+    if (nameToChange) {
+      
+      personService
+      .update(nameToChange.id,personObject)
+      .then((response)=>{
+
+        let newPerson = response.data
+        setPersons(persons.map(person => {
+          if (person.id === newPerson.id) return newPerson
+          return person
+        }))
+      })
+
+      // alert(`${personObject.name} is already ipersonObjectan the phonebook`);
     } else {
       personService //add a person
         .create(personObject)
