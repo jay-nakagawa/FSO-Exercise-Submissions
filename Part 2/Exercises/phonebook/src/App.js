@@ -70,7 +70,7 @@ const App = () => {
     console.log(nameToChange)
     console.log(personObject);
     if (nameToChange) {
-      
+     if(window.confirm('test')){
       personService
       .update(nameToChange.id,personObject)
       .then((response)=>{
@@ -81,7 +81,7 @@ const App = () => {
           return person
         }))
       })
-
+    }
       // alert(`${personObject.name} is already ipersonObjectan the phonebook`);
     } else {
       personService //add a person
@@ -104,6 +104,8 @@ const App = () => {
 
   console.log(filteredPeople);
   console.log(Object.values(persons));
+ 
+ 
   return (
     <div>
       <h1>Phonebook</h1>
