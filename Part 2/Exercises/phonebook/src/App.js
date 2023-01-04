@@ -15,6 +15,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null)
 
   //delete
   const removePerson = (id) => {
@@ -90,7 +91,10 @@ const App = () => {
           console.log(`response data ${response.data}`);
           console.log(`object ${personObject}`); //does this matter?
           setPersons(persons.concat(response.data));
-
+          setSuccessMessage(`Added ${personObject.name} to phonebook`)
+          setTimeout(()=>{
+            setSuccessMessage(null)
+          },5000)
           setNewName("");
           setNewNumber("");
         });
@@ -105,10 +109,22 @@ const App = () => {
   // console.log(filteredPeople);
   // console.log(Object.values(persons));
  
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null
+    }
+  
+    return (
+      <div className='success'>
+        {message}
+      </div>
+    )
+  }
  
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={successMessage} />
       <Filter newName={newFilter} handleFilterChange={handleFilterChange} />
 
       <h2>Add a Person</h2>
