@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     //req's server to send name,capital,currencies from all countries. server responds and data is set in countries.
     axios
-    .get("https://restcountries.com/v2/all?fields=name,capital,currencies")
+    .get("https://restcountries.com/v2/all?fields=name,capital,currencies,languages")
     .then((response) => {
       // console.log(response.data)
       setCountries(response.data);
@@ -44,7 +44,34 @@ function App() {
 
 
     if(countriesToShow.length === 0) {
-      return (<div>Search</div>)
+      return (
+        <div>Search for a country to begin</div>
+        )
+    }else if(countriesToShow.length === 1){
+      console.log(countriesToShow[0].languages)
+      let languages = countriesToShow[0].languages.map(languages=> languages.name)
+      console.log(`they speak ${languages}`)
+      return(
+        <div>
+          {countriesToShow[0].name}'s capital is 
+          {countriesToShow[0].capital} and they speak:  
+          <ul>
+            {languages.map((language)=>(
+              <li key={language}>{language}</li>
+            ))}
+
+          </ul>
+          {/* {countriesToShow[0].languages[0].name} */}
+          {/* <ul>
+            {
+            Object.values(countriesToShow[0].languages).map((language)=>(
+              <li key={language}>{language}</li>
+            
+            ))}
+          </ul> */}
+          
+        </div>
+      )
     }else if(countriesToShow.length<=10){
       return (
         <div>
@@ -53,6 +80,12 @@ function App() {
           ))}
         </div>
       );
+    }else if(countriesToShow.length>=10){
+      return(
+        <div>
+          Too many matches, please specify another filter.
+        </div>
+      )
     }
 
 
@@ -86,7 +119,7 @@ function App() {
     <div className="App">
       <h1>Countries</h1>
       <form onSubmit={search}>
-        <h2>Search for ............       
+        <h2>Search       
           <input value={filter} onChange={handleFilterChange}/>
 
         </h2>
