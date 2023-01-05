@@ -15,7 +15,7 @@ function App() {
     axios
     .get("https://restcountries.com/v2/all?fields=name,capital,currencies")
     .then((response) => {
-      console.log(response.data)
+      // console.log(response.data)
       setCountries(response.data);
     });
   }, []); // effect takes 2 param. 2nd param defines when effect is used, effect by default run after every render. empty array means it is only ran on the first render.
@@ -28,16 +28,56 @@ function App() {
   const handleFilterChange = (event) =>{
     // console.log(event.target)
     setFilter(event.target.value) //this synchronizes changes made to the input with the components state
+    setCountriesToShow( // shows countries that meet the search parameters
+      countries.filter((country) =>{
+   
+            return country.name.toLowerCase().includes(filter.toLowerCase()
+            )
+         
+         })
+      
+    )
   }
 
+  const Countries = ({countriesToShow}) => {
+    console.log(countriesToShow)
 
-  const filteredCountries = countries.filter((country) =>{
-   
-      return country.name.toLowerCase().includes(filter)
-   
-  })
 
-  console.log(filteredCountries)
+    if(countriesToShow.length === 0) {
+      return (<div>Search</div>)
+    }else if(countriesToShow.length<=10){
+      return (
+        <div>
+          {countriesToShow.map((country) => (
+            <div key={country.name}>{country.name}</div>
+          ))}
+        </div>
+      );
+    }
+
+
+  }
+
+  //   return(
+  //     <>
+  //     {
+  //   countriesToShow.map(country => 
+  // <li key={country.name}>
+  //   {country.name}'s capital is {country.capital} </li>
+  //   )}
+   
+  //     </>
+      
+    
+  //   )
+  
+
+  // {
+  //   countriesToShow.map(country => 
+  // <li key={country.name}>
+  //   {country.name}'s capital is {country.capital} </li>
+  //   )}
+
 
 
 
@@ -51,11 +91,12 @@ function App() {
 
         </h2>
       </form>
-      <ul>
+      
       {/* takes the array of filtered countries and renders an li for each one*/}
-      {filteredCountries.map(country => <li>{country.name}'s capital is {country.capital} </li>)}
+      {/* {countriesToShow.map(country => <li>{country.name}'s capital is {country.capital} </li>)} */}
+      <Countries countriesToShow={countriesToShow} />
      
-      </ul>
+      
     </div>
   );
 }
