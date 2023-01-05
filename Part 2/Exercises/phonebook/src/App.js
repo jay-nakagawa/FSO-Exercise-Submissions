@@ -15,8 +15,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [successMessage, setSuccessMessage] = useState('sdfsdf')
-  const [errorMessage, setErrorMessage] = useState('asd')
+  const [successMessage, setSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   //delete
   const removePerson = (id) => {
@@ -32,7 +32,9 @@ const App = () => {
         setPersons(updatedPersons);
       }).catch(error =>{
         setErrorMessage("User has already been deleted")
-        console.log(id)
+        setTimeout(() => {
+         setErrorMessage(null);
+        }, 5000)
       });
     }
   
@@ -117,19 +119,26 @@ const App = () => {
   const Notification = ({ message }) => {
     if (message === null) {
       return null
-    }
-  
-    return (
-      <div className='error' >
+    }else if(successMessage){
+      return(
+      <div className='success' >
         {message}
       </div>
+      )
+  }else if(errorMessage){
+    return(
+    <div className='error' >
+    {message}
+  </div>
     )
+  }
+    
   }
  
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification className='success' message={successMessage} />
+      <Notification  message={successMessage} />
       <Notification  message={errorMessage} />
       <Filter newName={newFilter} handleFilterChange={handleFilterChange} />
 
