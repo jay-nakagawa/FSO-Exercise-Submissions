@@ -15,7 +15,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState('sdfsdf')
+  const [errorMessage, setErrorMessage] = useState('asd')
 
   //delete
   const removePerson = (id) => {
@@ -29,6 +30,9 @@ const App = () => {
         console.log(updatedPersons);
   
         setPersons(updatedPersons);
+      }).catch(error =>{
+        setErrorMessage("User has already been deleted")
+        console.log(id)
       });
     }
   
@@ -83,7 +87,7 @@ const App = () => {
         }))
       })
     }
-      // alert(`${personObject.name} is already ipersonObjectan the phonebook`);
+      
     } else {
       personService //add a person
         .create(personObject)
@@ -97,7 +101,8 @@ const App = () => {
           },5000)
           setNewName("");
           setNewNumber("");
-        });
+        })
+        ;
     }
   };
 
@@ -115,7 +120,7 @@ const App = () => {
     }
   
     return (
-      <div className='success'>
+      <div className='error' >
         {message}
       </div>
     )
@@ -124,7 +129,8 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={successMessage} />
+      <Notification className='success' message={successMessage} />
+      <Notification  message={errorMessage} />
       <Filter newName={newFilter} handleFilterChange={handleFilterChange} />
 
       <h2>Add a Person</h2>
