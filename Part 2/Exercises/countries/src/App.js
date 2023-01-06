@@ -9,7 +9,7 @@ function App() {
   const [countriesToShow, setCountriesToShow] = useState([]); //holds countries that meet search parameters
 
   useEffect(() => {
-    //req's server to send name,capital,currencies from all countries. server responds and data is set in countries.
+    //req's server to send name,capital and other info for all countries
     axios
       .get(
         "https://restcountries.com/v2/all?fields=name,capital,currencies,languages,flags"
@@ -20,14 +20,11 @@ function App() {
       });
   }, []); // effect takes 2 param. 2nd param defines when effect is used, effect by default run after every render. empty array means it is only ran on the first render.
 
-  const search = (event) => {
-    //runs when form is submitted
-    event.preventDefault(); // stops submission of form which would cause page reload
-    console.log("button clicked", event.target);
-  };
+ 
+
   const handleFilterChange = (event) => {
-    // console.log(event.target)
-    setFilter(event.target.value); //this synchronizes changes made to the input with the components state
+    //holds filter parameters
+    setFilter(event.target.value); 
     setCountriesToShow(
       // shows countries that meet the search parameters
       countries.filter((country) => {
@@ -37,16 +34,18 @@ function App() {
   };
 
   const Countries = ({ countriesToShow }) => {
-    console.log(countriesToShow);
+   
 
     if (countriesToShow.length === 0) {
       return <div>Search for a country to begin</div>;
     } else if (countriesToShow.length === 1) {
       console.log(countriesToShow[0].languages);
+
       let languages = countriesToShow[0].languages.map(
         (languages) => languages.name
       );
-      console.log(`they speak ${languages}`);
+      
+
       return (
         <div>
           {` ${countriesToShow[0].name}'s capital is 
@@ -75,7 +74,7 @@ function App() {
   return (
     <div className="App">
       <h1>Countries</h1>
-      <form onSubmit={search}>
+      <form >
         <h2>
           Search
           <input value={filter} onChange={handleFilterChange} />
