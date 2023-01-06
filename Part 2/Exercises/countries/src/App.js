@@ -53,8 +53,8 @@ function App() {
       console.log(`they speak ${languages}`)
       return(
         <div>
-          {countriesToShow[0].name}'s capital is 
-          {countriesToShow[0].capital} and they speak:  
+         {` ${countriesToShow[0].name}'s capital is 
+          ${countriesToShow[0].capital} and they speak: `}
           <ul>
             {languages.map((language)=>(
               <li key={language}>{language}</li>
