@@ -45,7 +45,7 @@ function App() {
         </h2>
       </form>
 
-      <Countries countriesToShow={countriesToShow} />
+      <Countries countriesToShow={countriesToShow} setCountriesToShow={setCountriesToShow} />
     </div>
   );
 }

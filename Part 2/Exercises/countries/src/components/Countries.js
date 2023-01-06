@@ -2,11 +2,14 @@ const CountryData = ({ countriesToShow }) => {
   let languages = countriesToShow[0].languages.map(
     (languages) => languages.name
   );
+  let countryName = countriesToShow[0].name
+  let countryCapital = countriesToShow[0].capital
 
   return (
     <div>
-      {` ${countriesToShow[0].name}'s capital is 
-            ${countriesToShow[0].capital} and they speak: `}
+      <div>{countryName}</div>
+      <div>The capital is {countryCapital}</div>
+      <div>They speak</div>     
       <ul>
         {languages.map((language) => (
           <li key={language}>{language}</li>
@@ -17,15 +20,15 @@ const CountryData = ({ countriesToShow }) => {
   );
 };
 
-const Countries = ({ countriesToShow }) => {
+ 
+
+const Countries = ({ countriesToShow,setCountriesToShow }) => {
   const countryCount = countriesToShow.length;
-  console.log(countryCount);
+  console.log(countriesToShow);
 
   if (countryCount === 0) {
     return <div>Search for a country to begin</div>;
   } else if (countryCount === 1) {
-    console.log(countriesToShow[0].languages);
-
     return (
       <div>
         <CountryData countriesToShow={countriesToShow} />
@@ -35,7 +38,13 @@ const Countries = ({ countriesToShow }) => {
     return (
       <div>
         {countriesToShow.map((country) => (
-          <div key={country.name}>{country.name}</div>
+        
+          <div key={country.name}>
+            <div>{country.name}</div>
+            {/* why country need to be in array */}
+            <button onClick={()=> setCountriesToShow([country])}>click for additional information</button> 
+          </div>
+         
         ))}
       </div>
     );
