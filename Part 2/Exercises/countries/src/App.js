@@ -82,8 +82,6 @@ function App() {
         </h2>
       </form>
 
-      {/* takes the array of filtered countries and renders an li for each one*/}
-      {/* {countriesToShow.map(country => <li>{country.name}'s capital is {country.capital} </li>)} */}
       <Countries countriesToShow={countriesToShow} />
     </div>
   );
