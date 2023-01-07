@@ -1,3 +1,5 @@
+import WeatherData from "./WeatherInfo";
+
 const CountryData = ({ countriesToShow }) => {
   let languages = countriesToShow[0].languages.map(
     (languages) => languages.name
@@ -16,6 +18,7 @@ const CountryData = ({ countriesToShow }) => {
         ))}
       </ul>
       <img src={countriesToShow[0].flags.png} alt="flag" />
+      <WeatherData city={countryCapital}/>
     </div>
   );
 };
