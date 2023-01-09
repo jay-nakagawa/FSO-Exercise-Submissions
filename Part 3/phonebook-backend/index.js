@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 let persons = [
   {
@@ -42,7 +42,7 @@ app.get("/api/persons/:id", (request, response) => {
   const id = +request.params.id;
 
   const person = persons.find((person) => {
-    console.log(person.id, typeof person.id, id, typeof id, person.id === id);
+    // console.log(person.id, typeof person.id, id, typeof id, person.id === id);
     return person.id === id;
   });
 
@@ -61,34 +61,41 @@ app.delete("/api/persons/:id", (request, response) => {
 
 // const generateId=()=>{
 // const maxId = persons.length > 0
-//     ? Math.max(...persons.map(person => person.id)) 
+//     ? Math.max(...persons.map(person => person.id))
 //     : 0
 // }
 
-app.post('/api/persons', (request, response) => {
-  const body = request.body
-  console.log(body.name)
-  if(!body.name){
-    return response.status(400).json({ 
-      error: 'name missing' 
-    })
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+  console.log(body.name);
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: "info missing",
+    });
+  } 
+
+  //check persons array to see if there is any elements already using the name in the request body
+  const duplicateChecker = persons.find(person=> person.name===body.name ) 
+  //if there is a duplicate name then 404
+  if (duplicateChecker){
+    return response.status(400).json({
+      error: "duplicate name",
+    });
   }
+
+
 
   const person = {
     name: body.name,
     number: body.number,
-    id: Math.floor(Math.random()*100) //is this working?
-  }
-  
-  
+    id: Math.floor(Math.random() * 100), //is this working?
+  };
 
-  persons = persons.concat(person)
+  persons = persons.concat(person);
 
-  console.log(person)
-  response.json(person)
-  
-})
-
+  console.log(person);
+  response.json(person);
+});
 
 const PORT = 3001;
 app.listen(PORT, () => {
