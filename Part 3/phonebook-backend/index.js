@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json())
+
 let persons = [
   {
     id: 1,
@@ -36,27 +38,55 @@ app.get("/info", (request, response) => {
 app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
-app.get("/api/persons/:id",(request, response) =>{
-  const id = +request.params.id
- 
+app.get("/api/persons/:id", (request, response) => {
+  const id = +request.params.id;
+
+  const person = persons.find((person) => {
+    console.log(person.id, typeof person.id, id, typeof id, person.id === id);
+    return person.id === id;
+  });
+
+  if (person) {
+    response.json(person);
+  } else {
+    response.status(404).end();
+  }
+});
+
+app.delete("/api/persons/:id", (request, response) => {
+  const id = +request.params.id;
+  persons = persons.filter((person) => person.id !== id);
+  response.status(204).end();
+});
+
+// const generateId=()=>{
+// const maxId = persons.length > 0
+//     ? Math.max(...persons.map(person => person.id)) 
+//     : 0
+// }
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body
+  console.log(body.name)
+  if(!body.name){
+    return response.status(400).json({ 
+      error: 'name missing' 
+    })
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number,
+    id: Math.floor(Math.random()*100) //is this working?
+  }
   
-  const person = persons.find(person=> {
-    console.log(person.id, typeof person.id, id, typeof id, person.id === id)
-    return person.id === id})
-
-    if(person){
-      response.json(person)
-    }else{
-      response.status(404).end()
-    }
-
   
-})
 
-app.delete("/api/persons/:id",(request,response)=>{
-  const id = +request.params.id
-  persons = persons.filter(person=> person.id !== id)
-  response.status(204).end()
+  persons = persons.concat(person)
+
+  console.log(person)
+  response.json(person)
+  
 })
 
 
