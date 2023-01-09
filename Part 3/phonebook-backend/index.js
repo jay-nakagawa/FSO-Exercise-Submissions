@@ -3,15 +3,15 @@ const app = express();
 
 app.use(express.json());
 
-var morgan = require('morgan')
-// app.use(morgan('tiny'))
+// var morgan = require('morgan')
+// // app.use(morgan('tiny'))
 
-morgan.token('body', function getBody (req) {
- //an object can not be logged to it must be turned into a string 
-  return JSON.stringify(req.body)   
-})
+// morgan.token('body', function getBody (req) {
+//  //an object can not be logged to it must be turned into a string 
+//   return JSON.stringify(req.body)   
+// })
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
+// app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'))
 
 const cors = require('cors')
 
