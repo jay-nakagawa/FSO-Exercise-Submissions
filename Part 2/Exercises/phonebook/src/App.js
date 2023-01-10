@@ -41,12 +41,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log("effect");
-    personService.getAll().then((response) => {
-      console.log("promise fulfilled");
-      setPersons(response.data);
+    
+    personService.getAll().then((initialPersons) => {
+    console.log(initialPersons);
+     setPersons(initialPersons);
     });
   }, []);
+
+
 
   const handleNameChange = (event) => {
     // console.log(event.target.value);
@@ -93,10 +95,10 @@ const App = () => {
     } else {
       personService //add a person
         .create(personObject)
-        .then((response) => {
-          console.log(`response data ${response.data}`);
+        .then((returnedPerson) => {
+          console.log(`response data ${returnedPerson}`);
           console.log(`object ${personObject}`); //does this matter?
-          setPersons(persons.concat(response.data));
+          setPersons(persons.concat(returnedPerson));
           setSuccessMessage(`Added ${personObject.name} to phonebook`)
           setTimeout(()=>{
             setSuccessMessage(null)
