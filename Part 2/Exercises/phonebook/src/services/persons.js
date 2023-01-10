@@ -2,16 +2,12 @@ import axios from 'axios'
 const baseUrl = '/api/persons' 
 
 const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then((response) => {
-    console.log(response)
-    return response.data})
+  return axios.get(baseUrl)
   //
 }
 
 const create = newObject => {
-  const request = axios.post(baseUrl, newObject)
-  return request.then(response => response.data)
+  return axios.post(baseUrl, newObject)
 }
 
 const update = (id, newObject) => {
