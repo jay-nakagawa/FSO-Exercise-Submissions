@@ -15,29 +15,31 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   //delete
   const removePerson = (id) => {
     // console.log(person)
-    if(window.confirm('Confirm entry deletion')){
-      personService.remove(id).then(() => {
-        const updatedPersons = persons.filter((person) => {
-          console.log(person.id, id);
-          return person.id !== id;
+    if (window.confirm("Confirm entry deletion")) {
+      personService
+        .remove(id)
+        .then(() => {
+          const updatedPersons = persons.filter((person) => {
+            console.log(person.id, id);
+            return person.id !== id;
+          });
+          console.log(updatedPersons);
+
+          setPersons(updatedPersons);
+        })
+        .catch((error) => {
+          setErrorMessage("User has already been deleted");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
         });
-        console.log(updatedPersons);
-  
-        setPersons(updatedPersons);
-      }).catch(error =>{
-        setErrorMessage("User has already been deleted")
-        setTimeout(() => {
-         setErrorMessage(null);
-        }, 5000)
-      });
     }
-  
   };
 
   useEffect(() => {
@@ -72,24 +74,25 @@ const App = () => {
       id: persons.length + 1,
     };
 
-    
-    const nameToChange =  persons.find((x) => x.name === personObject.name)
+    const nameToChange = persons.find((x) => x.name === personObject.name);
     // console.log(nameToChange)
     // console.log(personObject);
     if (nameToChange) {
-     if(window.confirm(`${nameToChange.name} is already in the phonebook, replace old number with a new one?`)){
-      personService
-      .update(nameToChange.id,personObject)
-      .then((response)=>{
-
-        let newPerson = response.data
-        setPersons(persons.map(person => {
-          if (person.id === newPerson.id) return newPerson
-          return person
-        }))
-      })
-    }
-      
+      if (
+        window.confirm(
+          `${nameToChange.name} is already in the phonebook, replace old number with a new one?`
+        )
+      ) {
+        personService.update(nameToChange.id, personObject).then((response) => {
+          let newPerson = response.data;
+          setPersons(
+            persons.map((person) => {
+              if (person.id === newPerson.id) return newPerson;
+              return person;
+            })
+          );
+        });
+      }
     } else {
       personService //add a person
         .create(personObject)
@@ -97,14 +100,17 @@ const App = () => {
           console.log(`response data ${response.data}`);
           console.log(`object ${personObject}`); //does this matter?
           setPersons(persons.concat(response.data));
-          setSuccessMessage(`Added ${personObject.name} to phonebook`)
-          setTimeout(()=>{
-            setSuccessMessage(null)
-          },5000)
+          setSuccessMessage(`Added ${personObject.name} to phonebook`);
+          setTimeout(() => {
+            setSuccessMessage(null);
+          }, 5000);
           setNewName("");
           setNewNumber("");
         })
-        ;
+        .catch(error => {
+          // this is the way to access the error message
+          console.log(error.response.data.error)
+        })
     }
   };
 
@@ -115,31 +121,22 @@ const App = () => {
 
   // console.log(filteredPeople);
   // console.log(Object.values(persons));
- 
+
   const Notification = ({ message }) => {
     if (message === null) {
-      return null
-    }else if(successMessage){
-      return(
-      <div className='success' >
-        {message}
-      </div>
-      )
-  }else if(errorMessage){
-    return(
-    <div className='error' >
-    {message}
-  </div>
-    )
-  }
-    
-  }
- 
+      return null;
+    } else if (successMessage) {
+      return <div className="success">{message}</div>;
+    } else if (errorMessage) {
+      return <div className="error">{errorMessage}</div>;
+    }
+  };
+
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification  message={successMessage} />
-      <Notification  message={errorMessage} />
+      <Notification message={successMessage} />
+      <Notification errorMessage={errorMessage} />
       <Filter newName={newFilter} handleFilterChange={handleFilterChange} />
 
       <h2>Add a Person</h2>
