@@ -108,7 +108,11 @@ const App = () => {
           setNewNumber("");
         })
         .catch(error => {
-          // this is the way to access the error message
+          setErrorMessage(error.response.data.error)
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 5000);
+          
           console.log(error.response.data.error)
         })
     }
@@ -128,7 +132,7 @@ const App = () => {
     } else if (successMessage) {
       return <div className="success">{message}</div>;
     } else if (errorMessage) {
-      return <div className="error">{errorMessage}</div>;
+      return <div className="error">{message}</div>;
     }
   };
 
@@ -136,7 +140,7 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
       <Notification message={successMessage} />
-      <Notification errorMessage={errorMessage} />
+      <Notification message={errorMessage} />
       <Filter newName={newFilter} handleFilterChange={handleFilterChange} />
 
       <h2>Add a Person</h2>
