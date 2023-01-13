@@ -87,7 +87,12 @@ const App = () => {
           let newPerson = response.data;
           setPersons(
             persons.map((person) => {
-              if (person.id === newPerson.id) return newPerson;
+              if (person.id === newPerson.id) {
+                setSuccessMessage(`Updated ${newPerson.name}`)
+                setTimeout(()=>{
+                  setSuccessMessage(null)
+                }, 5000)
+                return newPerson}
               return person;
             })
           );
