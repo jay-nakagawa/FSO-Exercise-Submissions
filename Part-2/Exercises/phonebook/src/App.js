@@ -88,11 +88,12 @@ const App = () => {
           setPersons(
             persons.map((person) => {
               if (person.id === newPerson.id) {
-                setSuccessMessage(`Updated ${newPerson.name}`)
-                setTimeout(()=>{
-                  setSuccessMessage(null)
-                }, 5000)
-                return newPerson}
+                setSuccessMessage(`Updated ${newPerson.name}`);
+                setTimeout(() => {
+                  setSuccessMessage(null);
+                }, 5000);
+                return newPerson;
+              }
               return person;
             })
           );
@@ -112,14 +113,14 @@ const App = () => {
           setNewName("");
           setNewNumber("");
         })
-        .catch(error => {
-          setErrorMessage(error.response.data.error)
+        .catch((error) => {
+          setErrorMessage(error.response.data.error);
           setTimeout(() => {
             setErrorMessage(null);
           }, 5000);
-          
-          console.log(error.response.data.error)
-        })
+
+          console.log(error.response.data.error);
+        });
     }
   };
 

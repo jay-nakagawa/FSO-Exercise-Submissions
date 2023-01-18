@@ -1,10 +1,11 @@
-const Filter = ({newFilter,handleFilterChange}) => {
-    return(
+const Filter = ({ newFilter, handleFilterChange }) => {
+  return (
     <>
-    <h2>Find a person</h2>
-    <div>Filter for people containing : {}</div>
-    <input value={newFilter} onChange={handleFilterChange}/>
+      <h2>Find a person</h2>
+      <div>Filter for people containing : {}</div>
+      <input value={newFilter} onChange={handleFilterChange} />
     </>
-  )};
+  );
+};
 
-  export default Filter
+export default Filter;
