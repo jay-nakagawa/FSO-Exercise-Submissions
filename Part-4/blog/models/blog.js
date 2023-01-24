@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-const config = require("../utils/config")
 
-const url = config.MONGODB_URI
-
+const url = process.env.MONGODB_URI
+// console.log("this is",url)
+// console.log(process.env)
 
 const blogSchema = new mongoose.Schema({
   title: String,
