@@ -8,6 +8,8 @@ const Blog = require("./models/blog");
 const logger = require('./utils/logger')
 const config = require('./utils/config')
 
+
+
 app.use(cors())
 app.use(express.json())
 
