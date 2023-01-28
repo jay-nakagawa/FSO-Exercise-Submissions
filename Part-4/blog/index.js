@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 
-
+const app1 = require("./app")
 const logger = require('./utils/logger')
 const config = require('./utils/config')
 const blogsRouter = require('./controllers/blogs')
