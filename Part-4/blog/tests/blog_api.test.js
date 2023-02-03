@@ -58,8 +58,9 @@ const initialBlogs = [
 
 beforeEach(async ()=>{
   await Blog.deleteMany({})
-  let blogObject = new Blog(initialBlogs[0])
-  await blogObject.save()
+  let blogObject = initialBlogs.map(blog=> new Blog(blog))  
+  const promiseArray = blogObject.map(blog=> blog.save())
+  await Promise.all(promiseArray)
 })
 
 test('blogs are returned as json', async () => {
@@ -67,6 +68,14 @@ test('blogs are returned as json', async () => {
     .get('/api/blogs')
     .expect(200)
     .expect('Content-Type', /application\/json/)
+    console.log(api.body)
+})
+
+test('blogs have id property', async () => {
+ response = await api.get('/api/blogs')
+ arrId = response.body.map(blog=> blog.id) 
+ expect(arrId).toHaveLength(initialBlogs.length)
+  
 })
 
 afterAll(async () => {
