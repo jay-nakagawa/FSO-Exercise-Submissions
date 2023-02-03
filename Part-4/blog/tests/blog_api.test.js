@@ -1,9 +1,10 @@
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-const Blog = require('../models/blog')
+const mongoose = require("mongoose");
+const supertest = require("supertest");
+const { response } = require("../app");
+const app = require("../app");
+const Blog = require("../models/blog");
 
-const api = supertest(app)
+const api = supertest(app);
 
 const initialBlogs = [
   {
@@ -56,28 +57,33 @@ const initialBlogs = [
   },
 ];
 
-beforeEach(async ()=>{
-  await Blog.deleteMany({})
-  let blogObject = initialBlogs.map(blog=> new Blog(blog))  
-  const promiseArray = blogObject.map(blog=> blog.save())
-  await Promise.all(promiseArray)
-})
+beforeEach(async () => {
+  await Blog.deleteMany({});
+  let blogObject = initialBlogs.map((blog) => new Blog(blog));
+  const promiseArray = blogObject.map((blog) => blog.save());
+  await Promise.all(promiseArray);
+});
 
-test('blogs are returned as json', async () => {
+test("blogs are returned as json", async () => {
   await api
-    .get('/api/blogs')
+    .get("/api/blogs")
     .expect(200)
-    .expect('Content-Type', /application\/json/)
-    console.log(api.body)
-})
+    .expect("Content-Type", /application\/json/);
+});
 
-test('blogs have id property', async () => {
- response = await api.get('/api/blogs')
- arrId = response.body.map(blog=> blog.id) 
- expect(arrId).toHaveLength(initialBlogs.length)
-  
-})
+test("returned blogs have correct length", async () => {
+  const response = await api.get("/api/blogs");
+
+  expect(response.body).toHaveLength(initialBlogs.length);
+});
+
+test("blogs have id property", async () => {
+ const response = await api.get("/api/blogs");
+
+  arrId = response.body.map((blog) => blog.id);
+  expect(arrId).toHaveLength(initialBlogs.length);
+});
 
 afterAll(async () => {
-  await mongoose.connection.close()
-})
+  await mongoose.connection.close();
+});
