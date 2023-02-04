@@ -78,10 +78,21 @@ test("returned blogs have correct length", async () => {
 });
 
 test("blogs have id property", async () => {
- const response = await api.get("/api/blogs");
+  const response = await api.get("/api/blogs");
 
   arrId = response.body.map((blog) => blog.id);
   expect(arrId).toHaveLength(initialBlogs.length);
+});
+
+test("blog count increases by one after post req", async () => {
+  const newBlog = {
+    important: true,
+  };
+  await api.post("/api/blogs").send(newBlog).expect(201);
+
+  const updatedBlogs = await api.get("/api/blogs");
+
+  expect(updatedBlogs.body).toHaveLength(initialBlogs.length+1);
 });
 
 afterAll(async () => {
