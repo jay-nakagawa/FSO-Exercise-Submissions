@@ -92,7 +92,19 @@ test("blog count increases by one after post req", async () => {
 
   const updatedBlogs = await api.get("/api/blogs");
 
-  expect(updatedBlogs.body).toHaveLength(initialBlogs.length+1);
+  expect(updatedBlogs.body).toHaveLength(initialBlogs.length + 1);
+});
+
+test("if no value is given for likes then default to zero", async () => {
+  const newBlog = {
+    title: "test title",
+  };
+
+  await api.post("/api/blogs").send(newBlog);
+
+  const response = await api.get("/api/blogs");
+  const newBlogPost = response.body[response.body.length - 1];
+  expect(newBlogPost.likes).toEqual(0);
 });
 
 afterAll(async () => {
