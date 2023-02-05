@@ -79,7 +79,7 @@ test("returned blogs have correct length", async () => {
 
 test("blogs have id property", async () => {
   const response = await api.get("/api/blogs");
-
+console.log(response.body)
   arrId = response.body.map((blog) => blog.id);
   expect(arrId).toHaveLength(initialBlogs.length);
 });
@@ -105,6 +105,15 @@ test("if no value is given for likes then default to zero", async () => {
   const response = await api.get("/api/blogs");
   const newBlogPost = response.body[response.body.length - 1];
   expect(newBlogPost.likes).toEqual(0);
+});
+
+test("400 if no title or url", async () => {
+  const newBlog = {
+    author: "Robert C. Martin",
+  };
+
+  await api.post("/api/blogs").send(newBlog).expect(400);
+ 
 });
 
 afterAll(async () => {
