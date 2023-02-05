@@ -79,14 +79,15 @@ test("returned blogs have correct length", async () => {
 
 test("blogs have id property", async () => {
   const response = await api.get("/api/blogs");
-console.log(response.body)
+  console.log(response.body);
   arrId = response.body.map((blog) => blog.id);
   expect(arrId).toHaveLength(initialBlogs.length);
 });
 
 test("blog count increases by one after post req", async () => {
   const newBlog = {
-    important: true,
+    title: "Type wars",
+    url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
   };
   await api.post("/api/blogs").send(newBlog).expect(201);
 
@@ -97,7 +98,9 @@ test("blog count increases by one after post req", async () => {
 
 test("if no value is given for likes then default to zero", async () => {
   const newBlog = {
-    title: "test title",
+    title: "First class tests",
+    author: "Robert C. Martin",
+    url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
   };
 
   await api.post("/api/blogs").send(newBlog);
@@ -113,7 +116,6 @@ test("400 if no title or url", async () => {
   };
 
   await api.post("/api/blogs").send(newBlog).expect(400);
- 
 });
 
 afterAll(async () => {
