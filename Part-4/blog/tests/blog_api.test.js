@@ -130,17 +130,17 @@ test("a Blog can be deleted", async () => {
 });
 
 test("a Blog can be updated", async () => {
-  
   const response = await api.get("/api/blogs");
-  const blogToUpdate = response.body[0]
-  console.log(blogToUpdate)
-  await api.put(`/api/blogs/${blogToUpdate.id}`)
-  .send({title: "put req test",likes: 111})
-  .expect(200)
+  const blogToUpdate = response.body[0];
 
-  
+  await api
+    .put(`/api/blogs/${blogToUpdate.id}`)
+    .send({ title: "put req test", likes: 111 })
+    .expect(200);
 
-  
+  updatedBlogs = await (await api.get("/api/blogs")).body;
+
+  expect(updatedBlogs[0].likes).toEqual(111);
 });
 
 afterAll(async () => {
