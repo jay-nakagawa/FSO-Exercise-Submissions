@@ -118,6 +118,17 @@ test("400 if no title or url", async () => {
   await api.post("/api/blogs").send(newBlog).expect(400);
 });
 
+test("a Blog can be deleted", async () => {
+  const response = await api.get("/api/blogs");
+  const blogToDelete = response.body[0];
+  console.log("delete", blogToDelete);
+  await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+
+  const blogsAtEnd = await (await api.get("/api/blogs")).body;
+
+  expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
