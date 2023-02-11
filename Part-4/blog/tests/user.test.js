@@ -17,7 +17,7 @@ describe("when there is initially one user in db", () => {
     const user = new User({ username: "root", passwordHash });
 
     await user.save();
-  }, 10000);
+  });
 
   test("creation succeeds with a fresh username", async () => {
     const usersAtStart = await helper.usersInDb();
