@@ -14,18 +14,21 @@ blogsRouter.get("/", async (request, response) => {
 blogsRouter.post("/", async (request, response, next) => {
   const body = request.body;
 
-  const user = await User.findById(body.id);
-
+  const user = await User.findById(body.userId);
+  console.log("this is user", user);
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
     user: user.id,
   });
-  console.log(blog)
+
   const savedBlog = await blog.save();
-  user.blogs = user.notes.concat(savedBlog.id);
-  await user.save;
+  console.log("this is blog", savedBlog);
+  user.blogs = user.blogs.concat(savedBlog._id);
+  console.log("user.blogs", user.blogs);
+  await user.save(); //!!!!!!!!!!!!!!!!!!!!!!
+
   response.status(201).json(savedBlog);
 
   // const blog = new Blog(request.body);
