@@ -60,19 +60,19 @@ const App = () => {
   );
 
   const blogList = () =>
-  
     blogs.map((blog) => <Blog key={blog.id} blog={blog} />);
 
   return (
     <div>
       <h2>blogs</h2>
+
       {user === null && loginForm()}
-      {user !== null && <div>
-        <p>{user.name} logged in</p>
-        {blogList()}
-      </div>
-      
-      }
+      {user !== null && (
+        <div>
+          <p>{user.name} logged in</p>
+          {blogList()}
+        </div>
+      )}
     </div>
   );
 };
