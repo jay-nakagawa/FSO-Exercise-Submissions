@@ -28,6 +28,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      console.log('success')
     } catch (exception) {
       console.log("error")
       // setErrorMessage('Wrong credentials')
