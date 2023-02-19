@@ -49,7 +49,8 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    
+    window.localStorage.clear()
+    window.location.reload(false);
   }
 
   const loginForm = () => (
