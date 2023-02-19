@@ -60,12 +60,14 @@ const App = () => {
 
     console.log(blogObject)
 
-    // noteService
-    //   .create(noteObject)
-    //     .then(returnedNote => {
-    //     setNotes(notes.concat(returnedNote))
-    //     setNewNote('')
-    //   })
+    blogService
+      .create(blogObject)
+        .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewTitle('')
+        setNewAuthor('')
+        setNewUrl('')
+      })
   };
 
   // const handleBlogChange = (event) => {
