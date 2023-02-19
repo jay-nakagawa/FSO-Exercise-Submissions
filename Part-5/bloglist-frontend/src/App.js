@@ -9,9 +9,9 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
-  const [newAuthor, setNewAuthor] = useState("")
-  const [newTitle, setNewTitle] = useState("")
-  const [newUrl, setNewUrl] = useState("")
+  const [newAuthor, setNewAuthor] = useState("");
+  const [newTitle, setNewTitle] = useState("");
+  const [newUrl, setNewUrl] = useState("");
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -58,6 +58,8 @@ const App = () => {
       url: newUrl,
     };
 
+    console.log(blogObject)
+
     // noteService
     //   .create(noteObject)
     //     .then(returnedNote => {
@@ -66,11 +68,11 @@ const App = () => {
     //   })
   };
 
-  const handleBlogChange = (event) => {
-    setNewTitle(event.target.value)
-    setNewAuthor(event.target.value)
-    setNewUrl(event.target.value)
-  }
+  // const handleBlogChange = (event) => {
+  //   setNewTitle(event.target.value);
+  //   setNewAuthor(event.target.value);
+  //   setNewUrl(event.target.value);
+  // };
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -109,7 +111,7 @@ const App = () => {
         <input
           value={newTitle}
           name="Title"
-          onChange={({ target }) => setUsername(target.value)}
+          onChange={({ target }) => setNewTitle(target.value)}
         />
       </div>
       <div>
@@ -117,7 +119,7 @@ const App = () => {
         <input
           value={newAuthor}
           name="Author"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={({ target }) => setNewAuthor(target.value)}
         />
       </div>
       <div>
@@ -125,7 +127,7 @@ const App = () => {
         <input
           value={newUrl}
           name="Url"
-          onChange={({ target }) => setPassword(target.value)}
+          onChange={({ target }) => setNewUrl(target.value)}
         />
       </div>
       <button type="submit">save</button>
@@ -144,6 +146,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
+          {blogForm()}
           {blogList()}
         </div>
       )}
