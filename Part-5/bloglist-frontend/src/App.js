@@ -8,6 +8,7 @@ const App = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
+  const [message, setMessage] = useState(null);
 
   const [newAuthor, setNewAuthor] = useState("");
   const [newTitle, setNewTitle] = useState("");
@@ -40,13 +41,13 @@ const App = () => {
       console.log(user);
       setUsername("");
       setPassword("");
-      console.log("success");
+      setMessage("success");
     } catch (exception) {
       console.log("error");
-      // setErrorMessage('Wrong credentials')
-      // setTimeout(() => {
-      //   setErrorMessage(null)
-      // }, 5000)
+      setMessage("Wrong credentials");
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
     }
   };
 
@@ -58,16 +59,15 @@ const App = () => {
       url: newUrl,
     };
 
-    console.log(blogObject)
+    console.log(blogObject);
 
-    blogService
-      .create(blogObject)
-        .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setNewTitle('')
-        setNewAuthor('')
-        setNewUrl('')
-      })
+    blogService.create(blogObject).then((returnedBlog) => {
+      setBlogs(blogs.concat(returnedBlog));
+      setNewTitle("");
+      setNewAuthor("");
+      setNewUrl("")
+      setMessage("new blog added");
+    });
   };
 
   // const handleBlogChange = (event) => {
@@ -136,13 +136,21 @@ const App = () => {
     </form>
   );
 
+  const Notification = ({ message }) => {
+    if (message === null) {
+      return null;
+    }
+
+    return <div className="error">{message}</div>;
+  };
+
   const blogList = () =>
     blogs.map((blog) => <Blog key={blog.id} blog={blog} />);
 
   return (
     <div>
       <h2>blogs</h2>
-
+      <Notification message={message} />
       {user === null && loginForm()}
       {user !== null && (
         <div>
