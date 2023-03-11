@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
+import Notification from "./components/Notification";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 
@@ -36,6 +37,7 @@ const App = () => {
         username,
         password,
       });
+      // blogService.setToken(user.token)
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       setUser(user);
       console.log(user);
@@ -136,13 +138,13 @@ const App = () => {
     </form>
   );
 
-  const Notification = ({ message }) => {
-    if (message === null) {
-      return null;
-    }
+  // const Notification = ({ message }) => {
+  //   if (message === null) {
+  //     return null;
+  //   }
 
-    return <div className="error">{message}</div>;
-  };
+  //   return <div className="error">{message}</div>;
+  // };
 
   const blogList = () =>
     blogs.map((blog) => <Blog key={blog.id} blog={blog} />);
