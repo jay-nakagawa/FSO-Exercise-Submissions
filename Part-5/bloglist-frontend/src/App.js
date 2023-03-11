@@ -38,6 +38,8 @@ const App = () => {
         password,
       });
       // blogService.setToken(user.token)
+
+      //fixing local storage
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       setUser(user);
       console.log(user);
