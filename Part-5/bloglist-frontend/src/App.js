@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
+import BlogForm from "./components/BlogForm";
 import Notification from "./components/Notification";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
@@ -38,9 +39,7 @@ const App = () => {
         username,
         password,
       });
-      // blogService.setToken(user.token)
-
-      //fixing local storage
+      
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       setUser(user);
       console.log(user);
@@ -75,11 +74,6 @@ const App = () => {
     });
   };
 
-  // const handleBlogChange = (event) => {
-  //   setNewTitle(event.target.value);
-  //   setNewAuthor(event.target.value);
-  //   setNewUrl(event.target.value);
-  // };
 
   const handleLogout = () => {
     window.localStorage.clear();
@@ -110,36 +104,36 @@ const App = () => {
     </form>
   );
 
-  const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <h2>add a blog</h2>
-      <div>
-        title:
-        <input
-          value={newTitle}
-          name="Title"
-          onChange={({ target }) => setNewTitle(target.value)}
-        />
-      </div>
-      <div>
-        author:
-        <input
-          value={newAuthor}
-          name="Author"
-          onChange={({ target }) => setNewAuthor(target.value)}
-        />
-      </div>
-      <div>
-        url:
-        <input
-          value={newUrl}
-          name="Url"
-          onChange={({ target }) => setNewUrl(target.value)}
-        />
-      </div>
-      <button type="submit">save</button>
-    </form>
-  );
+  // const blogForm = () => (
+  //   <form onSubmit={addBlog}>
+  //     <h2>add a blog</h2>
+  //     <div>
+  //       title:
+  //       <input
+  //         value={newTitle}
+  //         name="Title"
+  //         onChange={({ target }) => setNewTitle(target.value)}
+  //       />
+  //     </div>
+  //     <div>
+  //       author:
+  //       <input
+  //         value={newAuthor}
+  //         name="Author"
+  //         onChange={({ target }) => setNewAuthor(target.value)}
+  //       />
+  //     </div>
+  //     <div>
+  //       url:
+  //       <input
+  //         value={newUrl}
+  //         name="Url"
+  //         onChange={({ target }) => setNewUrl(target.value)}
+  //       />
+  //     </div>
+  //     <button type="submit">save</button>
+  //   </form>
+  // );
 
  
 
@@ -155,7 +149,12 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
-          {blogForm()}
+          <BlogForm
+            handleTitleChange = {({target}) => setNewTitle(target.value)}
+            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
+            handleUrlChange = {({target}) => setNewUrl(target.value)}
+            addBlog = {addBlog}
+          />
           {blogList()}
         </div>
       )}
