@@ -141,13 +141,7 @@ const App = () => {
     </form>
   );
 
-  // const Notification = ({ message }) => {
-  //   if (message === null) {
-  //     return null;
-  //   }
-
-  //   return <div className="error">{message}</div>;
-  // };
+ 
 
   const blogList = () =>
     blogs.map((blog) => <Blog key={blog.id} blog={blog} />);
