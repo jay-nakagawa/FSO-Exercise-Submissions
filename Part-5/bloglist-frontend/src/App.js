@@ -14,6 +14,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   const [loginVisible, setLoginVisible] = useState(false)
+  const [blogVisible, setBlogVisible] = useState(false) 
 
 
   const [newAuthor, setNewAuthor] = useState("");
@@ -84,29 +85,7 @@ const App = () => {
     window.location.reload(false);
   };
 
-  // const loginForm = () => (
-  //   <form onSubmit={handleLogin}>
-  //     <div>
-  //       username
-  //       <input
-  //         type="text"
-  //         value={username}
-  //         name="Username"
-  //         onChange={({ target }) => setUsername(target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       password
-  //       <input
-  //         type="password"
-  //         value={password}
-  //         name="Password"
-  //         onChange={({ target }) => setPassword(target.value)}
-  //       />
-  //     </div>
-  //     <button type="submit">login</button>
-  //   </form>
-  // );
+
 
   const loginForm = () => {
     const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -131,37 +110,29 @@ const App = () => {
     )
   }
 
+  const blogForm = () => {
+    const hideWhenVisible = { display: blogVisible ? 'none' : '' }
+    const showWhenVisible = { display: blogVisible ? '' : 'none' }
 
-  // const blogForm = () => (
-  //   <form onSubmit={addBlog}>
-  //     <h2>add a blog</h2>
-  //     <div>
-  //       title:
-  //       <input
-  //         value={newTitle}
-  //         name="Title"
-  //         onChange={({ target }) => setNewTitle(target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       author:
-  //       <input
-  //         value={newAuthor}
-  //         name="Author"
-  //         onChange={({ target }) => setNewAuthor(target.value)}
-  //       />
-  //     </div>
-  //     <div>
-  //       url:
-  //       <input
-  //         value={newUrl}
-  //         name="Url"
-  //         onChange={({ target }) => setNewUrl(target.value)}
-  //       />
-  //     </div>
-  //     <button type="submit">save</button>
-  //   </form>
-  // );
+    return (
+      <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setBlogVisible(true)}>Add a blog</button>
+        </div>
+        <div style={showWhenVisible}>
+        <BlogForm
+            handleTitleChange = {({target}) => setNewTitle(target.value)}
+            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
+            handleUrlChange = {({target}) => setNewUrl(target.value)}
+            addBlog = {addBlog}
+          />
+          <button onClick={() => setBlogVisible(false)}>cancel</button>
+        </div>
+      </div>
+    )
+  }
+
+
 
 
 
@@ -178,12 +149,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
-          <BlogForm
-            handleTitleChange = {({target}) => setNewTitle(target.value)}
-            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
-            handleUrlChange = {({target}) => setNewUrl(target.value)}
-            addBlog = {addBlog}
-          />
+          {blogForm()}
           {blogList()}
         </div>
       )}
