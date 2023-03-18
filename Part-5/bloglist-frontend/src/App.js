@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+
 import Blog from "./components/Blog";
 import BlogForm from "./components/BlogForm";
+
 import LoginForm from "./components/LoginForm";
 import Notification from "./components/Notification";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import Togglable from "./components/Togglable";
+
 
 
 const App = () => {
@@ -15,7 +18,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
   
-  const [blogVisible, setBlogVisible] = useState(false) 
+  // const [blogVisible, setBlogVisible] = useState(false) 
 
 
   const [newAuthor, setNewAuthor] = useState("");
@@ -61,6 +64,11 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    window.localStorage.clear();
+    window.location.reload(false);
+  };
+
   const addBlog = (event) => {
     event.preventDefault();
     const blogObject = {
@@ -81,35 +89,32 @@ const App = () => {
   };
 
 
-  const handleLogout = () => {
-    window.localStorage.clear();
-    window.location.reload(false);
-  };
+ 
 
 
 
 
-  const blogForm = () => {
-    const hideWhenVisible = { display: blogVisible ? 'none' : '' }
-    const showWhenVisible = { display: blogVisible ? '' : 'none' }
+  // const blogForm = () => {
+  //   const hideWhenVisible = { display: blogVisible ? 'none' : '' }
+  //   const showWhenVisible = { display: blogVisible ? '' : 'none' }
 
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setBlogVisible(true)}>Add a blog</button>
-        </div>
-        <div style={showWhenVisible}>
-        <BlogForm
-            handleTitleChange = {({target}) => setNewTitle(target.value)}
-            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
-            handleUrlChange = {({target}) => setNewUrl(target.value)}
-            addBlog = {addBlog}
-          />
-          <button onClick={() => setBlogVisible(false)}>cancel</button>
-        </div>
-      </div>
-    )
-  }
+  //   return (
+  //     <div>
+  //       <div style={hideWhenVisible}>
+  //         <button onClick={() => setBlogVisible(true)}>Add a blog</button>
+  //       </div>
+  //       <div style={showWhenVisible}>
+  //       <BlogForm
+  //           handleTitleChange = {({target}) => setNewTitle(target.value)}
+  //           handleAuthorChange = {({target}) => setNewAuthor(target.value)}
+  //           handleUrlChange = {({target}) => setNewUrl(target.value)}
+  //           addBlog = {addBlog}
+  //         />
+  //         <button onClick={() => setBlogVisible(false)}>cancel</button>
+  //       </div>
+  //     </div>
+  //   )
+  // }
 
 
 
@@ -138,7 +143,19 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
-          {blogForm()}
+          <Togglable buttonLabel="new blog">
+          <BlogForm
+            handleTitleChange = {({target}) => setNewTitle(target.value)}
+            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
+            handleUrlChange = {({target}) => setNewUrl(target.value)}
+            addBlog = {addBlog}
+            newTitle = {newTitle}
+            newAuthor = {newAuthor}
+            newUrl = {newUrl}
+          />
+        </Togglable>
+
+
           {blogList()}
         </div>
       )}
