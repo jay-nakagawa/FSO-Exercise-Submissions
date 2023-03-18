@@ -1,3 +1,5 @@
+// import { useState } from 'react'
+
 const BlogForm = ({
   handleUrlChange,
   handleAuthorChange,
@@ -6,7 +8,12 @@ const BlogForm = ({
   newAuthor,
   newUrl,
   addBlog
-}) => (
+}) => {
+
+  
+
+
+return (
     <form onSubmit={addBlog}>
       <h2>add a blog</h2>
       <div>
@@ -35,6 +42,7 @@ const BlogForm = ({
       </div>
       <button type="submit" >save</button>
     </form>
-  );
+  )
+}
 
   export default BlogForm
