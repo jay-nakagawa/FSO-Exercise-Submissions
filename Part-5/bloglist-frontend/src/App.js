@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import Blog from "./components/Blog";
 import BlogForm from "./components/BlogForm";
@@ -24,6 +24,8 @@ const App = () => {
   const [newAuthor, setNewAuthor] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newUrl, setNewUrl] = useState("");
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -78,6 +80,7 @@ const App = () => {
     };
 
     console.log(blogObject);
+    blogFormRef.current.toggleVisibility()
 
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
@@ -143,7 +146,7 @@ const App = () => {
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
-          <Togglable buttonLabel="new blog">
+          <Togglable buttonLabel="new blog" ref={blogFormRef}>
           <BlogForm
             handleTitleChange = {({target}) => setNewTitle(target.value)}
             handleAuthorChange = {({target}) => setNewAuthor(target.value)}
