@@ -21,9 +21,9 @@ const App = () => {
   // const [blogVisible, setBlogVisible] = useState(false) 
 
 
-  const [newAuthor, setNewAuthor] = useState("");
-  const [newTitle, setNewTitle] = useState("");
-  const [newUrl, setNewUrl] = useState("");
+  // const [newAuthor, setNewAuthor] = useState("");
+  // const [newTitle, setNewTitle] = useState("");
+  // const [newUrl, setNewUrl] = useState("");
 
   const blogFormRef = useRef()
 
@@ -71,25 +71,24 @@ const App = () => {
     window.location.reload(false);
   };
 
-  const addBlog = (event) => {
-    event.preventDefault();
-    const blogObject = {
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl,
-    };
-
-    console.log(blogObject);
-    blogFormRef.current.toggleVisibility()
+  const addBlog = (blogObject) => {
+   
+    // blogFormRef.current.toggleVisibility()
 
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
-      setNewTitle("");
-      setNewAuthor("");
-      setNewUrl("")
       setMessage("new blog added");
+      
     });
+    blogFormRef.current.toggleVisibility()
   };
+
+ 
+
+ 
+
+
+  
 
 
  
@@ -97,29 +96,26 @@ const App = () => {
 
 
 
-  // const blogForm = () => {
-  //   const hideWhenVisible = { display: blogVisible ? 'none' : '' }
-  //   const showWhenVisible = { display: blogVisible ? '' : 'none' }
+  
+  // const addBlog = (event) => {
+  //   event.preventDefault();
+  //   const blogObject = {
+  //     title: newTitle,
+  //     author: newAuthor,
+  //     url: newUrl,
+  //   };
 
-  //   return (
-  //     <div>
-  //       <div style={hideWhenVisible}>
-  //         <button onClick={() => setBlogVisible(true)}>Add a blog</button>
-  //       </div>
-  //       <div style={showWhenVisible}>
-  //       <BlogForm
-  //           handleTitleChange = {({target}) => setNewTitle(target.value)}
-  //           handleAuthorChange = {({target}) => setNewAuthor(target.value)}
-  //           handleUrlChange = {({target}) => setNewUrl(target.value)}
-  //           addBlog = {addBlog}
-  //         />
-  //         <button onClick={() => setBlogVisible(false)}>cancel</button>
-  //       </div>
-  //     </div>
-  //   )
-  // }
+  //   console.log(blogObject);
+  //   blogFormRef.current.toggleVisibility()
 
-
+  //   blogService.create(blogObject).then((returnedBlog) => {
+  //     setBlogs(blogs.concat(returnedBlog));
+  //     setNewTitle("");
+  //     setNewAuthor("");
+  //     setNewUrl("")
+  //     setMessage("new blog added");
+  //   });
+  // };
 
 
 
@@ -147,14 +143,8 @@ const App = () => {
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
           <Togglable buttonLabel="new blog" ref={blogFormRef}>
-          <BlogForm
-            handleTitleChange = {({target}) => setNewTitle(target.value)}
-            handleAuthorChange = {({target}) => setNewAuthor(target.value)}
-            handleUrlChange = {({target}) => setNewUrl(target.value)}
-            addBlog = {addBlog}
-            newTitle = {newTitle}
-            newAuthor = {newAuthor}
-            newUrl = {newUrl}
+          <BlogForm            
+            addBlog = {addBlog}            
           />
         </Togglable>
 
