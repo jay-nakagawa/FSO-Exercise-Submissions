@@ -122,7 +122,7 @@ const App = () => {
 
  
   const blogList = () =>
-    blogs.map((blog) => <Blog key={blog.id} blog={blog} />);
+    blogs.map((blog) => <Blog user={user} key={blog.id} blog={blog} />);
 
   return (
     <div>
@@ -149,7 +149,7 @@ const App = () => {
           />
         </Togglable>
 
-
+        
           {blogList()}
         </div>
       )}

@@ -1,11 +1,13 @@
 import { useState } from "react"
 
-const Blog = ({blog}) => {
+const Blog = ({blog,user}) => {
   const [visible, setVisible] = useState(false)
   
   const toggleVisible = () => {
     setVisible(!visible)
   }
+
+  
  
   const blogStyle = {
     paddingTop: 10,
@@ -27,9 +29,15 @@ const Blog = ({blog}) => {
     </div>
     {visible && 
     <div>
-      {blog.author} {blog.likes} {blog.url} 
-      <div>{blog.user.username}</div>
+      {blog.author} {blog.likes} {blog.url} {blog.user.username}
+      <div>{console.log(blog.user.username)}
+      {console.log(user.username.length)}
+      {console.log(user.username.length)}
+     
+      
+      </div>
     </div>}
+
      
   </div>  
 )}
