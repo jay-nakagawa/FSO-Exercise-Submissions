@@ -14,12 +14,16 @@ const Blog = ({blog}) => {
     borderWidth: 1,
     marginBottom: 5
   }
+
+  const buttonStyle = {
+    marginLeft: 10
+  }
   
   return (
   <div style={blogStyle}>
     <div>
       {blog.title}
-      <button onClick={toggleVisible}>{visible? "hide" : "show"}</button>
+      <button style={buttonStyle} onClick={toggleVisible}>{visible? "hide" : "show"}</button>
     </div>
     {visible && 
     <div>
