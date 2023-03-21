@@ -30,6 +30,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
+  
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
@@ -73,7 +74,7 @@ const App = () => {
 
   const addBlog = (blogObject) => {
    
-    // blogFormRef.current.toggleVisibility()
+   
 
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));

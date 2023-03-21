@@ -6,7 +6,7 @@ const Blog = ({blog}) => {
   const toggleVisible = () => {
     setVisible(!visible)
   }
-
+ 
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -27,7 +27,8 @@ const Blog = ({blog}) => {
     </div>
     {visible && 
     <div>
-      {blog.author} {blog.likes} {blog.url}
+      {blog.author} {blog.likes} {blog.url} 
+      <div>{blog.user.username}</div>
     </div>}
      
   </div>  
