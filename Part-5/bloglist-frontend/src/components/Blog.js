@@ -29,13 +29,11 @@ const Blog = ({blog,user}) => {
     </div>
     {visible && 
     <div>
-      {blog.author} {blog.likes} {blog.url} {blog.user.username || user.username}
-      <div>{console.log(blog.user.username)}
-      {console.log(user.username.length)}
-      {console.log(user.username.length)}
-     
+      <div>{blog.author}</div>
+      <div>{blog.url}</div>  
+      <div>likes = {blog.likes}   </div>
+      <div>posted by {blog.user.username || user.username}</div>
       
-      </div>
     </div>}
 
      
