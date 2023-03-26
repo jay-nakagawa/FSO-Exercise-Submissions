@@ -85,6 +85,17 @@ const App = () => {
   };
 
  
+  const updateLikes = async (id, updatedBlog) => {
+    try {
+      const response = await blogService.update(id, updatedBlog);
+
+      setBlogs(
+        blogs.map((blog) => (blog.id === response.id ? response : blog))
+      );
+    } catch (exception) {
+      setMessage("error" + exception.response.data.error);
+    }
+  };
 
  
 
@@ -122,7 +133,7 @@ const App = () => {
 
  
   const blogList = () =>
-    blogs.map((blog) => <Blog user={user} key={blog.id} blog={blog} />);
+    blogs.map((blog) => <Blog user={user} key={blog.id} blog={blog} updateLikes={updateLikes} />);
 
   return (
     <div>
