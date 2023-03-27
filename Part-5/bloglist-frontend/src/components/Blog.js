@@ -49,9 +49,11 @@ const Blog = ({blog,user,updateLikes}) => {
         <button onClick={handleLikes} style={buttonStyle}>like</button>
       </div>
       <div>posted by {blog.user.username || user.username}</div>
-      
-    </div>}
-
+      {(blog.user.username === user.username) &&(
+      <button style={buttonStyle}>delete</button>
+)}
+    </div>
+}
      
   </div>  
 )}
