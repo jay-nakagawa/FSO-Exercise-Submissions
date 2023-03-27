@@ -29,7 +29,12 @@ const update = (id,updatedBlogObject) => {
   return request.then(response =>response.data)
 }
 
+const deleteBlog = (id) => { 
+ const request = axios.delete(`${baseUrl}/${id}`)
+  return request.then(response => response.data)
+}
+
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, setToken,create, update }
+export default { getAll, setToken,create, update , deleteBlog}

@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-const Blog = ({blog,user,updateLikes}) => {
+const Blog = ({blog,user,updateLikes,deleteBlog}) => {
   const [visible, setVisible] = useState(false)
   
   const toggleVisible = () => {
@@ -20,6 +20,10 @@ const Blog = ({blog,user,updateLikes}) => {
    console.log("updated",updatedBlogObject)
 
    updateLikes(blog.id, updatedBlogObject)
+  }
+
+  const handleDelete = () => {  
+    deleteBlog(blog.id)
   }
  
   const blogStyle = {
@@ -50,7 +54,7 @@ const Blog = ({blog,user,updateLikes}) => {
       </div>
       <div>posted by {blog.user.username || user.username}</div>
       {(blog.user.username === user.username) &&(
-      <button style={buttonStyle}>delete</button>
+      <button style={buttonStyle} onClick={handleDelete}>delete</button>
 )}
     </div>
 }
