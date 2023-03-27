@@ -17,7 +17,7 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
-  
+
   // const [blogVisible, setBlogVisible] = useState(false) 
 
 
@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
-  
+
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
@@ -51,7 +51,7 @@ const App = () => {
         username,
         password,
       });
-      
+
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       setUser(user);
       console.log(user);
@@ -73,18 +73,18 @@ const App = () => {
   };
 
   const addBlog = (blogObject) => {
-   
-   
+
+
 
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
       setMessage("new blog added");
-      
+
     });
     blogFormRef.current.toggleVisibility()
   };
 
- 
+
   const updateLikes = async (id, updatedBlog) => {
     try {
       const response = await blogService.update(id, updatedBlog);
@@ -97,18 +97,18 @@ const App = () => {
     }
   };
 
- 
-
-
-  
-
-
- 
 
 
 
 
-  
+
+
+
+
+
+
+
+
   // const addBlog = (event) => {
   //   event.preventDefault();
   //   const blogObject = {
@@ -131,9 +131,11 @@ const App = () => {
 
 
 
- 
+
   const blogList = () =>
-    blogs.map((blog) => <Blog user={user} key={blog.id} blog={blog} updateLikes={updateLikes} />);
+    blogs.sort((a, b) => b.likes - a.likes)
+      .map((blog) => <Blog user={user} key={blog.id} blog={blog} updateLikes={updateLikes} />
+      );
 
   return (
     <div>
@@ -155,12 +157,12 @@ const App = () => {
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
           <Togglable buttonLabel="new blog" ref={blogFormRef}>
-          <BlogForm            
-            addBlog = {addBlog}            
-          />
-        </Togglable>
+            <BlogForm
+              addBlog={addBlog}
+            />
+          </Togglable>
 
-        
+
           {blogList()}
         </div>
       )}
