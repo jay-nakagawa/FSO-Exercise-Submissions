@@ -79,6 +79,9 @@ const App = () => {
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
       setMessage("new blog added");
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
 
     });
     blogFormRef.current.toggleVisibility()
@@ -88,7 +91,10 @@ const App = () => {
   const updateLikes = async (id, updatedBlog) => {
     try {
       const response = await blogService.update(id, updatedBlog);
-
+      setMessage("Liked post")
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
       setBlogs(
         blogs.map((blog) => (blog.id === response.id ? response : blog))
       );
