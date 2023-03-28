@@ -18,12 +18,6 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
 
-  // const [blogVisible, setBlogVisible] = useState(false) 
-
-
-  // const [newAuthor, setNewAuthor] = useState("");
-  // const [newTitle, setNewTitle] = useState("");
-  // const [newUrl, setNewUrl] = useState("");
 
   const blogFormRef = useRef()
 
@@ -103,47 +97,24 @@ const App = () => {
     }
   };
 
-const deleteBlog = async (id) => {
-  try{
-    await blogService.deleteBlog(id)
-    setMessage("deleted blog")
-    setTimeout(() => {
-      setMessage(null);
-    }, 5000);
-    setBlogs(blogs.filter((blog) => blog.id !== id));
-  } catch (exception) {
-    setMessage("error" + exception.response.data.error);
+  const deleteBlog = async (id) => {
+    try {
+      await blogService.deleteBlog(id)
+      setMessage("deleted blog")
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+      setBlogs(blogs.filter((blog) => blog.id !== id));
+    } catch (exception) {
+      setMessage("error" + exception.response.data.error);
+    }
   }
-}
 
 
 
 
 
 
-
-
-
-
-  // const addBlog = (event) => {
-  //   event.preventDefault();
-  //   const blogObject = {
-  //     title: newTitle,
-  //     author: newAuthor,
-  //     url: newUrl,
-  //   };
-
-  //   console.log(blogObject);
-  //   blogFormRef.current.toggleVisibility()
-
-  //   blogService.create(blogObject).then((returnedBlog) => {
-  //     setBlogs(blogs.concat(returnedBlog));
-  //     setNewTitle("");
-  //     setNewAuthor("");
-  //     setNewUrl("")
-  //     setMessage("new blog added");
-  //   });
-  // };
 
 
 

@@ -23,7 +23,9 @@ const Blog = ({blog,user,updateLikes,deleteBlog}) => {
   }
 
   const handleDelete = () => {  
-    deleteBlog(blog.id)
+    if (window.confirm('Are you sure you want to delete this item?')){ 
+      deleteBlog(blog.id)}
+
   }
  
   const blogStyle = {

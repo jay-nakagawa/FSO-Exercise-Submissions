@@ -19,22 +19,23 @@ const create = async newObject => {
 
   const response = await axios.post(baseUrl, newObject, config)
   console.log(response)
- console.log(response.data)
+  console.log(response.data)
   return response.data
 }
 
-const update = (id,updatedBlogObject) => {
-  const request = axios.put(`${baseUrl}/${id}`,updatedBlogObject)
-  
-  return request.then(response =>response.data)
+const update = (id, updatedBlogObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, updatedBlogObject)
+
+  return request.then(response => response.data)
 }
 
-const deleteBlog = (id) => { 
- const request = axios.delete(`${baseUrl}/${id}`)
+const deleteBlog = (id) => {
+  const request = axios.delete(`${baseUrl}/${id}`)
+
   return request.then(response => response.data)
 }
 
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, setToken,create, update , deleteBlog}
+export default { getAll, setToken, create, update, deleteBlog }
