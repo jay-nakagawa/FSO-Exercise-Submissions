@@ -9,8 +9,6 @@ import blogService from "./services/blogs";
 import loginService from "./services/login";
 import Togglable from "./components/Togglable";
 
-
-
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState("");
@@ -18,20 +16,18 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState(null);
 
-
-  const blogFormRef = useRef()
+  const blogFormRef = useRef();
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
-
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
-      console.log(user)
+      console.log(user);
       blogService.setToken(user.token);
     }
   }, []);
@@ -67,25 +63,20 @@ const App = () => {
   };
 
   const addBlog = (blogObject) => {
-
-
-
     blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog));
       setMessage("new blog added");
       setTimeout(() => {
         setMessage(null);
       }, 5000);
-
     });
-    blogFormRef.current.toggleVisibility()
+    blogFormRef.current.toggleVisibility();
   };
-
 
   const updateLikes = async (id, updatedBlog) => {
     try {
       const response = await blogService.update(id, updatedBlog);
-      setMessage("Liked post")
+      setMessage("Liked post");
       setTimeout(() => {
         setMessage(null);
       }, 5000);
@@ -99,8 +90,8 @@ const App = () => {
 
   const deleteBlog = async (id) => {
     try {
-      await blogService.deleteBlog(id)
-      setMessage("deleted blog")
+      await blogService.deleteBlog(id);
+      setMessage("deleted blog");
       setTimeout(() => {
         setMessage(null);
       }, 5000);
@@ -108,27 +99,26 @@ const App = () => {
     } catch (exception) {
       setMessage("error" + exception.response.data.error);
     }
-  }
-
-
-
-
-
-
-
-
-
+  };
 
   const blogList = () =>
-    blogs.sort((a, b) => b.likes - a.likes)
-      .map((blog) => <Blog user={user} key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog} />
-      );
+    blogs
+      .sort((a, b) => b.likes - a.likes)
+      .map((blog) => (
+        <Blog
+          user={user}
+          key={blog.id}
+          blog={blog}
+          updateLikes={updateLikes}
+          deleteBlog={deleteBlog}
+        />
+      ));
 
   return (
     <div>
       <h2>blogs</h2>
       <Notification message={message} />
-      {!user &&
+      {!user && (
         <Togglable buttonLabel="log in">
           <LoginForm
             username={username}
@@ -138,17 +128,14 @@ const App = () => {
             handleSubmit={handleLogin}
           />
         </Togglable>
-      }
+      )}
       {user !== null && (
         <div>
           <p>{user.name} logged in</p>
           <button onClick={handleLogout}>logout</button>
           <Togglable buttonLabel="new blog" ref={blogFormRef}>
-            <BlogForm
-              addBlog={addBlog}
-            />
+            <BlogForm addBlog={addBlog} />
           </Togglable>
-
 
           {blogList()}
         </div>
