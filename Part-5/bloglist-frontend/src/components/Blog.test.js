@@ -13,8 +13,11 @@ test("renders content", () => {
 
   render(<Blog blog={blog} />);
 
-  const element = screen.getByText(
-    "test title"
-  );
-  expect(element).toBeDefined();
+  const titleAndAuthor = screen.getByText("test title", "test author");
+  //   const urlAndLikes = screen.queryByText("kjnkkk");
+  //   screen.debug();
+  expect(titleAndAuthor).toBeDefined();
+  //   expect(urlAndLikes).toBeNull();
+  //   expect(urlAndLikes).toBeNull();
+  //   expect(urlAndLikes).toBeDefined();
 });
