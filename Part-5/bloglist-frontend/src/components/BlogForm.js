@@ -1,10 +1,6 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-
-const BlogForm = ({
-  addBlog
-}) => {
-
+const BlogForm = ({ addBlog }) => {
   const [newAuthor, setNewAuthor] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newUrl, setNewUrl] = useState("");
@@ -22,16 +18,10 @@ const BlogForm = ({
     };
 
     console.log(blogObject);
-    addBlog(blogObject)
+    addBlog(blogObject);
     setNewTitle("");
     setNewAuthor("");
-    setNewUrl("")
-
-
-      ;
-
-
-
+    setNewUrl("");
   };
 
   return (
@@ -61,9 +51,9 @@ const BlogForm = ({
           onChange={({ target }) => setNewUrl(target.value)}
         />
       </div>
-      <button type="submit" >save</button>
+      <button type="submit">save</button>
     </form>
-  )
-}
+  );
+};
 
-export default BlogForm
+export default BlogForm;

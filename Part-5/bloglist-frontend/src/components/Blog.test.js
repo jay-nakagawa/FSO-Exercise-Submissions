@@ -12,16 +12,15 @@ test("renders content", () => {
   };
 
   const { container } = render(<Blog blog={blog} />);
-  const title = container.querySelector(".title");
+  const titleAndAuthor = container.querySelector(".titleAndAuthor");
   // const author = container.querySelector(".author");
   const url = container.querySelector(".url");
 
-  expect(title).toHaveTextContent("test title", "test author");
+  expect(titleAndAuthor).toHaveTextContent("test title", "test author");
   // expect(author).toHaveTextContent("test author");
   expect(url).not.toBeInTheDocument();
   screen.debug();
 
-  // const titleAndAuthor = screen.getByText("test title", "test author");
   //   const urlAndLikes = screen.queryByText("kjnkkk");
   //   screen.debug();
   // expect(titleAndAuthor).toBeDefined();
