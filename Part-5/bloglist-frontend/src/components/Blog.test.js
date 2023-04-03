@@ -13,13 +13,16 @@ test("renders content", () => {
 
   const { container } = render(<Blog blog={blog} />);
   const titleAndAuthor = container.querySelector(".titleAndAuthor");
-  // const author = container.querySelector(".author");
   const url = container.querySelector(".url");
+  const likes = container.querySelector(".likes");
 
-  expect(titleAndAuthor).toHaveTextContent("test title", "test author");
-  // expect(author).toHaveTextContent("test author");
+  expect(titleAndAuthor).toHaveTextContent("test title");
+  expect(titleAndAuthor).toHaveTextContent("test author");
   expect(url).not.toBeInTheDocument();
-  screen.debug();
+  expect(likes).not.toBeInTheDocument();
+
+
+  // screen.debug();
 
   //   const urlAndLikes = screen.queryByText("kjnkkk");
   //   screen.debug();
