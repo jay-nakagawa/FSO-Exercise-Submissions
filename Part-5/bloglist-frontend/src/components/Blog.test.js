@@ -39,4 +39,13 @@ describe("Blog entry", () => {
     expect(screen.getByText("test url")).toBeInTheDocument();
     expect(screen.getByText(`likes = ${blog.likes}`)).toBeInTheDocument();
   });
+
+  test("Clicking the like button twice calls the event handler twice", () => {
+    const mockHandler = jest.fn();
+    render(<Blog blog={blog} user={user} updateLikes={mockHandler} />);
+    fireEvent.click(screen.getByText("show"));
+    fireEvent.click(screen.getByText("like"));
+    fireEvent.click(screen.getByText("like"));
+    expect(mockHandler.mock.calls).toHaveLength(2);
+  });
 });
