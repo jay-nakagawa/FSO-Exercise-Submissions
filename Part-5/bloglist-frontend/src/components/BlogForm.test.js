@@ -40,11 +40,13 @@ test("<BlogForm /> updates parent state and calls onSubmit", async () => {
   await user.type(urlInput, "https://www.test.com");
   await user.click(sendButton);
 
-  console.log(createBlog.mock.calls[0]);
-  console.log(addBlog.mock.calls[0]);
+  console.log("createBlog",createBlog.mock.calls[0]);
+  console.log("addblog",addBlog.mock.calls[0]);
 
   expect(addBlog.mock.calls).toHaveLength(1);
-  expect(addBlog.mock.calls[0][0]).toBe("title");
-  expect(addBlog.mock.calls[0][1]).toBe("author");
-  expect(addBlog.mock.calls[0][2]).toBe("https://www.test.com");
+  expect(addBlog.mock.calls[0][0]).toEqual({
+    title: "title",
+    author: "author",
+    url: "https://www.test.com",
+  });
 });
