@@ -45,6 +45,11 @@ describe("Blog app", function () {
   describe("When logged in", function () {
     beforeEach(function () {
       cy.login({ username: "admin", password: "pass123" });
+      cy.createBlog({
+        title: "Go To Statement Considered Harmful",
+        author: "Edsger W. Dijkstra",
+        url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+      });
     });
 
     it("A blog can be created", function () {
@@ -54,7 +59,16 @@ describe("Blog app", function () {
       cy.get("#author").type("this is a test");
       cy.get("#url").type("this is a test");
       cy.get("#save").click();
-      cy.contains("new blog added");
+      cy.contains("this is a test");
     });
   });
+  // describe("and a blog exists", function () {
+  //   beforeEach(function () {
+  //     cy.createBlog({
+  //       title: "Go To Statement Considered Harmful",
+  //       author: "Edsger W. Dijkstra",
+  //       url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+  //     });
+  //   });
+  // });
 });
