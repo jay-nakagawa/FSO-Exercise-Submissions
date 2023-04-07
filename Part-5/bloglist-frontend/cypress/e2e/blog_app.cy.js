@@ -67,14 +67,11 @@ describe("Blog app", function () {
       cy.get("#like").click();
       cy.contains("likes = 1");
     });
-    // describe("and a blog exists", function () {
-    //   beforeEach(function () {
-    //     cy.createBlog({
-    //       title: "Go To Statement Considered Harmful",
-    //       author: "Edsger W. Dijkstra",
-    //       url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-    //     });
-    //   });
-    // });
+    it("A blog can be deleted", function () {
+      cy.contains("show").click();
+      cy.contains("delete").click();
+      cy.contains("Go To Statement Considered Harmful").should("not.exist");
+      cy.contains("deleted blog");
+    });
   });
 });
