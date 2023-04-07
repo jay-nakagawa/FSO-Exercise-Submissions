@@ -44,10 +44,7 @@ describe("Blog app", function () {
   });
   describe("When logged in", function () {
     beforeEach(function () {
-      cy.contains("log in").click();
-      cy.get("#username").type("admin");
-      cy.get("#password").type("pass123");
-      cy.get("#login-button").click();
+      cy.login({ username: "admin", password: "pass123" });
     });
 
     it("A blog can be created", function () {
@@ -57,7 +54,7 @@ describe("Blog app", function () {
       cy.get("#author").type("this is a test");
       cy.get("#url").type("this is a test");
       cy.get("#save").click();
-      cy.contains("success");
+      cy.contains("new blog added");
     });
   });
 });
