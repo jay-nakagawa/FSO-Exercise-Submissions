@@ -55,6 +55,7 @@ describe("Blog app", function () {
         title: "Go To Statement Considered Harmful",
         author: "Edsger W. Dijkstra",
         url: "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+        likes: 6,
       });
     });
 
@@ -85,6 +86,31 @@ describe("Blog app", function () {
       cy.contains("show").click();
       cy.contains("delete").should("not.exist");
       cy.contains("like");
+    });
+    it("blogs are ordered by likes", function () {
+      cy.createBlog({
+        title: "blog2",
+        author: "blog2",
+        url: "blog2",
+      });
+      cy.createBlog({
+        title: "blog3",
+        author: "blog3",
+        url: "blog3",
+      });
+      cy.contains("blog3").parent().find("button").click();
+      cy.contains("blog3").parent().find("#like").click();
+      cy.contains("blog3").parent().find("#like").click();
+      cy.contains("hide").click();
+
+      cy.contains("blog2").parent().find("button").click();
+      cy.contains("blog2").parent().find("#like").click();
+
+      cy.get("#blog").then((blogs) => {
+        cy.wrap(blogs[0]).contains("blog3");
+        cy.wrap(blogs[1]).contains("blog2");
+        cy.wrap(blogs[2]).contains("Go To Statement Considered Harmful");
+      });
     });
   });
 });
