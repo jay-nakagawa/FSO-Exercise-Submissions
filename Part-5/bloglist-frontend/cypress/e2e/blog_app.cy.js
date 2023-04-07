@@ -12,6 +12,11 @@ describe("Blog app", function () {
       username: "admin",
       password: "pass123",
     };
+    const user2 = {
+      name: "jay2",
+      username: "admin2",
+      password: "pass123",
+    };
     // const blog = {
     //   title: "Go To Statement Considered Harmful",
     //   author: "Edsger W. Dijkstra",
@@ -19,6 +24,7 @@ describe("Blog app", function () {
     // };
     // cy.request("POST", "http://localhost:3003/api/blogs/", blog);
     cy.request("POST", "http://localhost:3003/api/users/", user);
+    cy.request("POST", "http://localhost:3003/api/users/", user2);
     cy.visit("http://localhost:3000");
   });
   it("front page can be opened", function () {
@@ -72,6 +78,13 @@ describe("Blog app", function () {
       cy.contains("delete").click();
       cy.contains("Go To Statement Considered Harmful").should("not.exist");
       cy.contains("deleted blog");
+    });
+    it("delete button is not visible to other users", function () {
+      cy.login({ username: "admin2", password: "pass123" });
+      cy.contains("jay2 logged in");
+      cy.contains("show").click();
+      cy.contains("delete").should("not.exist");
+      cy.contains("like");
     });
   });
 });
