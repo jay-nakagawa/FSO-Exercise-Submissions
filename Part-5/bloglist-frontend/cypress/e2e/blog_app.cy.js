@@ -42,4 +42,22 @@ describe("Blog app", function () {
       cy.contains("Wrong credentials");
     });
   });
+  describe("When logged in", function () {
+    beforeEach(function () {
+      cy.contains("log in").click();
+      cy.get("#username").type("admin");
+      cy.get("#password").type("pass123");
+      cy.get("#login-button").click();
+    });
+
+    it("A blog can be created", function () {
+      cy.contains("new blog").click();
+      cy.contains("add a blog");
+      cy.get("#title").type("this is a test");
+      cy.get("#author").type("this is a test");
+      cy.get("#url").type("this is a test");
+      cy.get("#save").click();
+      cy.contains("success");
+    });
+  });
 });

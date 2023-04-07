@@ -1,16 +1,16 @@
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
 const User = require("../models/user");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-    console.log("authorized")
+const getTokenFrom = (request) => {
+  const authorization = request.get("authorization");
+  if (authorization && authorization.startsWith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
+    console.log("authorized");
   }
-  return null
-}
+  return null;
+};
 
 blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({}).populate("user", {
@@ -23,16 +23,25 @@ blogsRouter.get("/", async (request, response) => {
 
 blogsRouter.post("/", async (request, response, next) => {
   const body = request.body;
-  console.log("body",body)
-  const decodedToken = jwt.verify(getTokenFrom(request),process.env.SECRET)
-  console.log("token",decodedToken)
-  if (!decodedToken.id){
-    return response.status(401).json({error: 'token invalid'})
+  console.log("body", body);
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+  console.log("token", decodedToken);
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: "token invalid" });
   }
 
-  const user = await User.findById(decodedToken.id);
-  console.log("this is user", user);
-  
+  // const user = await User.findById(decodedToken.id);
+  // console.log("this is user", user);
+
+  let user;
+  try {
+    user = await User.findById(decodedToken.id);
+    console.log("USER!!",user)
+  } catch (error) {
+    console.error("Error finding user:", error);
+    return response.status(500).json({ error: "Error finding user" });
+  }
+
   const blog = new Blog({
     title: body.title,
     author: body.author,
