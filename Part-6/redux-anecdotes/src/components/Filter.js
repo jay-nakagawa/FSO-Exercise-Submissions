@@ -5,8 +5,8 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    console.log(event.target.value);
-   const filterValue = event.target.value;
+    
+    const filterValue = event.target.value;
 
     dispatch(filterChange(filterValue));
   };
