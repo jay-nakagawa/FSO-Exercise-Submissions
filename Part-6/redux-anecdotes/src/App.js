@@ -5,6 +5,7 @@ import Filter from "./components/Filter";
 const App = () => {
   return (
     <div>
+      <Notification />
       <Filter />
       <AnecdoteList />
       <AnecdoteForm />
