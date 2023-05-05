@@ -7,8 +7,8 @@ const notificationSlice = createSlice({
     initialState: "test notification",
     reducers: {
         createNotification: (state, action) => {
-            const message = action.payload;
-            state.push(message);
+           console.log(action.payload,state)
+            return action.payload;
         }
     }
 });
