@@ -1,19 +1,13 @@
 import { useQuery } from "react-query";
 import { getAnecdotes } from "./requests";
 
-
-
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 
 const App = () => {
-
-  const result = useQuery(
-    'anecdotes', getAnecdotes, 
-    {
-      retry: false
-    }
-  )
+  const result = useQuery("anecdotes", getAnecdotes, {
+    retry: false,
+  });
 
   console.log(result);
 
@@ -22,9 +16,8 @@ const App = () => {
   }
 
   if (result.isError) {
-    return <span>Error: {result.error.message}</span>
+    return <span>Error: {result.error.message}</span>;
   }
-
 
   const anecdotes = result.data;
 
