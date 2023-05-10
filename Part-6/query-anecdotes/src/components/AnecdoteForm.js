@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { createAnecdote } from "../requests";
 
-const AnecdoteForm = () => {
+const AnecdoteForm = ({dispatch}) => {
   const queryClient = useQueryClient();
 
   const newAnecdoteMutation = useMutation(createAnecdote, {
@@ -16,6 +16,10 @@ const AnecdoteForm = () => {
     event.target.anecdote.value = "";
     console.log("new anecdote");
     newAnecdoteMutation.mutate({content});
+    dispatch({ type: "CREATE" });
+    setTimeout(() => {
+      dispatch({ type: "CLEAR"});
+    }, 5000);
   };
 
   return (
