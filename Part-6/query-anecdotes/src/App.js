@@ -10,7 +10,9 @@ const notificationReducer = (state, action) => {
     case "VOTE":
       return "you voted";
     case "CREATE":
-      return { ...state, message: `you created '${action.data.content}'` };
+      return "you created";
+    case "CLEAR":
+      return null;
     default:
       return state;
   }
@@ -36,6 +38,9 @@ const App = () => {
   });
   const handleVote = (anecdote) => {
     notificationDispatch({ type: "VOTE" });
+    setTimeout(() => {
+      notificationDispatch({ type: "CLEAR"});
+    }, 5000);
     console.log(anecdote);
     updateAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
   };
