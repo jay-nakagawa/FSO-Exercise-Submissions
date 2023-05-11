@@ -15,6 +15,8 @@ const notificationReducer = (state, action) => {
       return "you created";
     case "CLEAR":
       return null;
+    case "ERROR":
+      return "Error: "  + action.message;
     default:
       return state;
   }
@@ -36,7 +38,8 @@ const App = () => {
   const updateAnecdoteMutation = useMutation(updateAnecdote, {
     onSuccess: () => {
       queryClient.invalidateQueries("anecdotes");
-    },
+    }
+   
   });
   const handleVote = (anecdote) => {
     notificationDispatch({ type: "VOTE" });
