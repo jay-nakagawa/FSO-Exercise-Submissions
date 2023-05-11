@@ -2,6 +2,8 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getAnecdotes, updateAnecdote } from "./requests";
 import { useReducer } from "react";
 
+import NotificationContext from "./NotificationContext";
+
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 
@@ -39,7 +41,7 @@ const App = () => {
   const handleVote = (anecdote) => {
     notificationDispatch({ type: "VOTE" });
     setTimeout(() => {
-      notificationDispatch({ type: "CLEAR"});
+      notificationDispatch({ type: "CLEAR" });
     }, 5000);
     console.log(anecdote);
     updateAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
@@ -48,17 +50,15 @@ const App = () => {
   if (result.isLoading) {
     return <div>loading data...</div>;
   }
-
   if (result.isError) {
     return <span>Error: {result.error.message}</span>;
   }
-
   return (
-    <div>
+    <NotificationContext.Provider value={[notification, notificationDispatch]}>
       <h3>Anecdote app</h3>
 
-      <Notification notification={notification} />
-      <AnecdoteForm dispatch = {notificationDispatch} />
+      <Notification />
+      <AnecdoteForm />
 
       {anecdotes.map((anecdote) => (
         <div key={anecdote.id}>
@@ -69,7 +69,7 @@ const App = () => {
           </div>
         </div>
       ))}
-    </div>
+    </NotificationContext.Provider>
   );
 };
 
